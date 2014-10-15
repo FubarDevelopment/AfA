@@ -25,7 +25,7 @@ namespace FubarDev.Afa.Entities
                 Abschreibungsstatus.Ignorieren,
                 Abschreibungsstatus.Ignorieren,
             };
-            ZuOderAbschreibung = ZuOderAbschreibung.Ignorieren;
+            Typ = AfaTyp.Normal;
         }
 
         public Abschreibung(string konto, int neuesJahr, Abschreibung vorherige)
@@ -68,7 +68,7 @@ namespace FubarDev.Afa.Entities
         public virtual decimal AfAMonat12 { get; set; }
         public virtual Abschreibungsstatus StatusFuerJahr { get; set; }
         public virtual Abschreibungsstatus[] StatusProMonat { get; set; }
-        public virtual ZuOderAbschreibung ZuOderAbschreibung { get; set; }
+        public virtual AfaTyp Typ { get; set; }
         public virtual decimal? Betrag { get; set; }
         public virtual DateTime? DatumDerZuOderAbschreibung { get; set; }
         public virtual string Reserviert2 { get; set; }

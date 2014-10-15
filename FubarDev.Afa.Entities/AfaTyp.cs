@@ -5,10 +5,10 @@ using System.Text;
 
 namespace FubarDev.Afa.Entities
 {
-    public enum ZuOderAbschreibung
+    public enum AfaTyp
     {
         Zuschreibung = 'Z',
         Abschreibung = 'A',
-        Ignorieren = 'X',
+        Normal = 'X',
     }
 }

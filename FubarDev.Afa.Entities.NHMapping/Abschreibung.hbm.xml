@@ -28,7 +28,7 @@
     <property name="AfAMonat12" not-null="true" />
     <property name="StatusFuerJahr" length="1" type="NHibernate.Type.EnumCharType`1[[FubarDev.Afa.Entities.Abschreibungsstatus, FubarDev.Afa.Entities]], NHibernate" not-null="true" />
     <property name="StatusProMonat" length="12" type="FubarDev.Afa.Entities.NHMapping.UserTypes.AbschreibungsstatusJahr, FubarDev.Afa.Entities.NHMapping" not-null="true" />
-    <property name="ZuOderAbschreibung" length="1" type="NHibernate.Type.EnumCharType`1[[FubarDev.Afa.Entities.ZuOderAbschreibung, FubarDev.Afa.Entities]], NHibernate" not-null="true" />
+    <property name="Typ" length="1" type="NHibernate.Type.EnumCharType`1[[FubarDev.Afa.Entities.AfaTyp, FubarDev.Afa.Entities]], NHibernate" not-null="true" />
     <property name="Betrag" />
     <property name="DatumDerZuOderAbschreibung" />
     <property name="Reserviert2" length="46" />
