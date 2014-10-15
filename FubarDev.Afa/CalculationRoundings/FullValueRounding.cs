@@ -16,7 +16,15 @@ namespace FubarDev.Afa.CalculationRoundings
             if (period == 0)
                 return new CalculationMethodResult(period, 0, data.AcquisitionValue);
 
-            var result = method.CalculateDepreciation(data, period);
+            CalculationMethodResult result;
+            if (period == data.DepreciationRange)
+            {
+                result = new CalculationMethodResult(period, 0, data.TargetRemainingValue);
+            }
+            else
+            {
+                result = method.CalculateDepreciation(data, period);
+            }
             CalculationMethodResult resultOld;
             if (period == 1)
             {
