@@ -51,6 +51,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CalculationMethods\ArithmetischDegressiv.cs" />
+    <Compile Include="CalculationMethods\GeometrischDegressiv.cs" />
+    <Compile Include="CalculationMethods\Linear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
