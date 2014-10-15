@@ -69,8 +69,8 @@ namespace FubarDev.Afa.Entities
         public virtual Abschreibungsstatus StatusFuerJahr { get; set; }
         public virtual Abschreibungsstatus[] StatusProMonat { get; set; }
         public virtual AfaTyp Typ { get; set; }
-        public virtual decimal? Betrag { get; set; }
-        public virtual DateTime? DatumDerZuOderAbschreibung { get; set; }
+        public virtual decimal? SonderAfaBetrag { get; set; }
+        public virtual DateTime? SonderAfaDatum { get; set; }
         public virtual string Reserviert2 { get; set; }
 
         public override bool Equals(object obj)

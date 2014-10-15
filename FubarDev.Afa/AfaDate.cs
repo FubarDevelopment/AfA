@@ -41,6 +41,16 @@ namespace FubarDev.Afa
             Day = day;
         }
 
+        public static AfaDate GetEndOfMonth(int year, int month)
+        {
+            return new AfaDate(year, month, 30);
+        }
+
+        public static AfaDate GetBeginOfMonth(int year, int month)
+        {
+            return new AfaDate(year, month, 1);
+        }
+
         private static void FixDate(ref int year, ref int month, ref int day)
         {
             month += day / 30;
@@ -158,6 +168,30 @@ namespace FubarDev.Afa
         public static bool operator <=(AfaDate d1, AfaDate d2)
         {
             return d1.CompareTo(d2) <= 0;
+        }
+
+        public static implicit operator AfaDate(DateTime d)
+        {
+            return new AfaDate(d);
+        }
+
+        public static implicit operator DateTime(AfaDate d)
+        {
+            return new DateTime(d.Year, d.Month, d.Day);
+        }
+
+        public static implicit operator AfaDate?(DateTime? d)
+        {
+            if (!d.HasValue)
+                return null;
+            return new AfaDate(d.Value);
+        }
+
+        public static implicit operator DateTime?(AfaDate? d)
+        {
+            if (!d.HasValue)
+                return null;
+            return new DateTime(d.Value.Year, d.Value.Month, d.Value.Day);
         }
     }
 }

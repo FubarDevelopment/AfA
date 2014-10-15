@@ -13,8 +13,8 @@
     <DefaultLanguage>de-DE</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,7 +42,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfaDate.cs" />
+    <Compile Include="CalculationConfiguration.cs" />
+    <Compile Include="CalculationData.cs" />
+    <Compile Include="CalculationMethodResult.cs" />
+    <Compile Include="CalculationMethods\ArithmetischDegressiv.cs" />
+    <Compile Include="CalculationMethods\GeometrischDegressiv.cs" />
+    <Compile Include="CalculationMethods\Linear.cs" />
+    <Compile Include="CalculationRoundings\FullValueRounding.cs" />
     <Compile Include="Calculator.cs" />
+    <Compile Include="DecimalMath.cs" />
+    <Compile Include="GwgAccountEventArgs.cs" />
+    <Compile Include="ICalculationMethod.cs" />
+    <Compile Include="ICalculationRounding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
