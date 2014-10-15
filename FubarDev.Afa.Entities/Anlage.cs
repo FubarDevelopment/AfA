@@ -50,7 +50,7 @@ namespace FubarDev.Afa.Entities
         {
             get
             {
-                return Abschreibungen.Values.OrderBy(x => x.Jahr).LastOrDefault();
+                return Abschreibungen.Values.Where(x => x.Jahr < AktivesJahr).OrderByDescending(x => x.Jahr).FirstOrDefault();
             }
         }
     }
