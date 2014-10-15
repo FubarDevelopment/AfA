@@ -8,7 +8,7 @@ namespace FubarDev.Afa.CalculationMethods
 {
     public class Linear : ICalculationMethod
     {
-        public CalculationMethodResult CalculateDepreciation(CalculationData data, int period)
+        public CalculationResult CalculateDepreciation(CalculationData data, int period)
         {
             if (period < 1 || period > data.DepreciationRange)
                 throw new ArgumentOutOfRangeException("period", "The period must be greater than 0 and less than the value of depreciationRange.");
@@ -16,7 +16,7 @@ namespace FubarDev.Afa.CalculationMethods
             var depreciation = (data.AcquisitionValue - data.TargetRemainingValue) / data.DepreciationRange;
             var remainingValue = data.AcquisitionValue - depreciation * period;
 
-            return new CalculationMethodResult(period, depreciation, remainingValue);
+            return new CalculationResult(period, depreciation, remainingValue);
         }
     }
 }

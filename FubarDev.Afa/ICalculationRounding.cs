@@ -8,6 +8,6 @@ namespace FubarDev.Afa
 {
     public interface ICalculationRounding
     {
-        CalculationMethodResult Calculate(ICalculationMethod method, CalculationData data, int period);
+        CalculationResult Calculate(ICalculationMethod method, CalculationData data, int period);
     }
 }

@@ -8,27 +8,27 @@ namespace FubarDev.Afa.CalculationRoundings
 {
     public class FullValueRounding : ICalculationRounding
     {
-        public CalculationMethodResult Calculate(ICalculationMethod method, CalculationData data, int period)
+        public CalculationResult Calculate(ICalculationMethod method, CalculationData data, int period)
         {
             if (period < 0 || period > data.DepreciationRange)
                 throw new ArgumentOutOfRangeException("period", "The period must be greater or equal than 0 and less than the value of depreciationRange.");
 
             if (period == 0)
-                return new CalculationMethodResult(period, 0, data.AcquisitionValue);
+                return new CalculationResult(period, 0, data.AcquisitionValue);
 
-            CalculationMethodResult result;
+            CalculationResult result;
             if (period == data.DepreciationRange)
             {
-                result = new CalculationMethodResult(period, 0, data.TargetRemainingValue);
+                result = new CalculationResult(period, 0, data.TargetRemainingValue);
             }
             else
             {
                 result = method.CalculateDepreciation(data, period);
             }
-            CalculationMethodResult resultOld;
+            CalculationResult resultOld;
             if (period == 1)
             {
-                resultOld = new CalculationMethodResult(0, 0, data.AcquisitionValue);
+                resultOld = new CalculationResult(0, 0, data.AcquisitionValue);
             }
             else
             {
@@ -38,7 +38,7 @@ namespace FubarDev.Afa.CalculationRoundings
             var remainingValue = Math.Round(result.RemainingValue);
             var remainingValueOld = Math.Round(resultOld.RemainingValue);
 
-            return new CalculationMethodResult(period, remainingValueOld - remainingValue, remainingValue);
+            return new CalculationResult(period, remainingValueOld - remainingValue, remainingValue);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace FubarDev.Afa
 {
     public interface ICalculationMethod
     {
-        CalculationMethodResult CalculateDepreciation(CalculationData data, int period);
+        CalculationResult CalculateDepreciation(CalculationData data, int period);
     }
 }

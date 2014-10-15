@@ -6,7 +6,7 @@ namespace FubarDev.Afa.Tests.CalculationMethods
     [TestClass]
     public class ArithmetischDegressiv
     {
-        private void TestResult(CalculationMethodResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
+        private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
             Assert.AreEqual(expectedRemainingValue, result.RemainingValue);
             Assert.AreEqual(expectedDepreciation, result.Depreciation);
@@ -15,7 +15,6 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         [TestMethod]
         public void TestArithmetischDegressiv1()
         {
-            var cfg = new Afa.CalculationConfiguration();
             var data = new Afa.CalculationData(150000, 18000, 5);
             var rounding = new Afa.CalculationRoundings.FullValueRounding();
             var calc = new Afa.CalculationMethods.ArithmetischDegressiv();

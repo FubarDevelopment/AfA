@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FubarDev.Afa
 {
-    public class CalculationMethodResult
+    public class CalculationResult
     {
-        public CalculationMethodResult(int period, decimal depreciation, decimal remainingValue)
+        public CalculationResult(int period, decimal depreciation, decimal remainingValue)
         {
             Period = period;
             Depreciation = depreciation;

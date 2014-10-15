@@ -17,7 +17,7 @@ namespace FubarDev.Afa.CalculationMethods
             return (data.AcquisitionValue - data.TargetRemainingValue) / CalculateParts(data.DepreciationRange);
         }
 
-        public CalculationMethodResult CalculateDepreciation(CalculationData data, int period)
+        public CalculationResult CalculateDepreciation(CalculationData data, int period)
         {
             if (period < 1 || period > data.DepreciationRange)
                 throw new ArgumentOutOfRangeException("period", "The period must be greater than 0 and less than the value of depreciationRange.");
@@ -30,7 +30,7 @@ namespace FubarDev.Afa.CalculationMethods
             var depreciation = amount * (data.DepreciationRange - period + 1);
             var remainingValue = data.AcquisitionValue - amount * (maxParts - periodParts);
 
-            return new CalculationMethodResult(period, depreciation, remainingValue);
+            return new CalculationResult(period, depreciation, remainingValue);
         }
     }
 }

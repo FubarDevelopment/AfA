@@ -13,7 +13,7 @@ namespace FubarDev.Afa.CalculationMethods
             return Math.Round(DecimalMath.Root(data.TargetRemainingValue / data.AcquisitionValue, data.DepreciationRange), 4, MidpointRounding.AwayFromZero);
         }
 
-        public CalculationMethodResult CalculateDepreciation(CalculationData data, int period)
+        public CalculationResult CalculateDepreciation(CalculationData data, int period)
         {
             if (period < 1 || period > data.DepreciationRange)
                 throw new ArgumentOutOfRangeException("period", "The period must be greater than 0 and less than the value of depreciationRange.");
@@ -25,7 +25,7 @@ namespace FubarDev.Afa.CalculationMethods
             var remainingValue = factor * oldValue;
             var depreciation = oldValue - remainingValue;
 
-            return new CalculationMethodResult(period, depreciation, remainingValue);
+            return new CalculationResult(period, depreciation, remainingValue);
         }
     }
 }
