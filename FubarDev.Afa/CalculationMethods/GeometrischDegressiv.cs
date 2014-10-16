@@ -10,7 +10,7 @@ namespace FubarDev.Afa.CalculationMethods
     {
         private decimal CalculateFactor(CalculationData data)
         {
-            return Math.Round(DecimalMath.Root(data.TargetRemainingValue / data.AcquisitionValue, data.DepreciationRange), 4, MidpointRounding.AwayFromZero);
+            return DecimalMath.Root(data.TargetRemainingValue / data.AcquisitionValue, data.DepreciationRange);
         }
 
         public CalculationResult CalculateDepreciation(CalculationData data, int period)
