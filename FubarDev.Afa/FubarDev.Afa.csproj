@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="AfaDate.cs" />
     <Compile Include="CalculationData.cs" />
+    <Compile Include="CalculationMethods\ArithmetischProgressiv.cs" />
     <Compile Include="CalculationMethods\GeometrischProgressiv.cs" />
+    <Compile Include="CalculationMethods\WeightCalculationDelegate.cs" />
     <Compile Include="CalculationResult.cs" />
     <Compile Include="CalculationMethods\ArithmetischDegressiv.cs" />
     <Compile Include="CalculationMethods\GeometrischDegressiv.cs" />

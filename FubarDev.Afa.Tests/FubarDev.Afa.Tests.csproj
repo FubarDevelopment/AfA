@@ -50,6 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="CalculationMethods\ArithmetischProgressiv.cs" />
     <Compile Include="CalculationMethods\ArithmetischDegressiv.cs" />
     <Compile Include="CalculationMethods\GeometrischProgressiv.cs" />
     <Compile Include="CalculationMethods\GeometrischDegressiv.cs" />
