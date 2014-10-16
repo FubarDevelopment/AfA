@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AfaDate.cs" />
     <Compile Include="CalculationData.cs" />
+    <Compile Include="CalculationMethods\GeometrischProgressiv.cs" />
     <Compile Include="CalculationResult.cs" />
     <Compile Include="CalculationMethods\ArithmetischDegressiv.cs" />
     <Compile Include="CalculationMethods\GeometrischDegressiv.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="GwgAccountEventArgs.cs" />
     <Compile Include="ICalculationMethod.cs" />
     <Compile Include="ICalculationRounding.cs" />
+    <Compile Include="LinqExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
