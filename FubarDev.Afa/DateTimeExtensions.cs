@@ -8,12 +8,12 @@ namespace FubarDev.Afa
 {
     public static class DateTimeExtensions
     {
-        public static AfaDate ToAfaDate(this DateTime d, AfaDatePrecision precision)
+        public static AfaDate ToAfaDate(this DateTime d, AfaDateRounding precision)
         {
             return new AfaDate(d, precision);
         }
 
-        public static AfaDate? ToAfaDate(this DateTime? d, AfaDatePrecision precision)
+        public static AfaDate? ToAfaDate(this DateTime? d, AfaDateRounding precision)
         {
             if (d == null)
                 return null;

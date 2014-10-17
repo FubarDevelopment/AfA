@@ -41,7 +41,7 @@ namespace FubarDev.Afa
                 ? Entities.Abschreibungsart.GWG
                 : abschreibung.Abschreibungsart);
 
-            var precision = (abschreibung.GenauesDatum ? AfaDatePrecision.Day : AfaDatePrecision.HalfYear);
+            var precision = (abschreibung.GenauesDatum ? AfaDateRounding.Day : AfaDateRounding.HalfYear);
 
             var zugangsdatum = anlage.Anschaffungsdatum.ToAfaDate(precision);
             var abgangsdatum = anlage.Abgangsdatum.ToAfaDate(precision);
@@ -87,7 +87,7 @@ namespace FubarDev.Afa
         {
             if (abschreibung.GenauesDatum)
                 return date;
-            return new AfaDate(date.Year, (date.Month < 6) ? 1 : 7, 1, AfaDatePrecision.HalfYear);
+            return new AfaDate(date.Year, (date.Month < 6) ? 1 : 7, 1, AfaDateRounding.HalfYear);
         }
     }
 }
