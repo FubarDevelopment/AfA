@@ -41,8 +41,10 @@ namespace FubarDev.Afa
                 ? Entities.Abschreibungsart.GWG
                 : abschreibung.Abschreibungsart);
 
-            var zugangsdatum = (AfaDate)anlage.Anschaffungsdatum;
-            var abgangsdatum = (AfaDate?)anlage.Abgangsdatum;
+            var precision = (abschreibung.GenauesDatum ? AfaDatePrecision.Day : AfaDatePrecision.HalfYear);
+
+            var zugangsdatum = anlage.Anschaffungsdatum.ToAfaDate(precision);
+            var abgangsdatum = anlage.Abgangsdatum.ToAfaDate(precision);
 
             var nutzungsdauer = (decimal)abschreibung.Nutzungsdauer.GetValueOrDefault();
             var anschaffungswert = anlage.Anschaffungswert;
@@ -63,11 +65,11 @@ namespace FubarDev.Afa
                 case Entities.AfaTyp.Abschreibung:
                     System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
                     zugangsdatum = AfaDate.GetEndOfMonth(Year - 1, 12);
-                    abgangsdatum = abschreibung.SonderAfaDatum.GetValueOrDefault();
+                    abgangsdatum = abschreibung.SonderAfaDatum.GetValueOrDefault().ToAfaDate(precision);
                     break;
                 case Entities.AfaTyp.Zuschreibung:
                     System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
-                    zugangsdatum = abschreibung.SonderAfaDatum.GetValueOrDefault();
+                    zugangsdatum = abschreibung.SonderAfaDatum.GetValueOrDefault().ToAfaDate(precision);
                     abgangsdatum = AfaDate.GetBeginOfMonth(Year + 1, 1);
                     break;
             }
@@ -85,7 +87,7 @@ namespace FubarDev.Afa
         {
             if (abschreibung.GenauesDatum)
                 return date;
-            return new AfaDate(date.Year, (date.Month < 6) ? 1 : 7, 1);
+            return new AfaDate(date.Year, (date.Month < 6) ? 1 : 7, 1, AfaDatePrecision.HalfYear);
         }
     }
 }
