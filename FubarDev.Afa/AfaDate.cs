@@ -7,6 +7,10 @@ namespace FubarDev.Afa
 {
     public struct AfaDate : IComparable<AfaDate>, IComparable, IEquatable<AfaDate>
     {
+        private static readonly DateTime _startDate = new DateTime(1753, 1, 1);
+
+        public const AfaDatePrecision DefaultPrecision = AfaDatePrecision.Days30;
+
         public int Year { get; private set; }
         public int Month { get; private set; }
         public int Day { get; private set; }
@@ -14,7 +18,15 @@ namespace FubarDev.Afa
         {
             get
             {
-                return (Month - 1) * 30 + Day;
+                switch (Precision)
+                {
+                    case AfaDatePrecision.Days30:
+                        return (Month - 1) * 30 + Day;
+                    case AfaDatePrecision.DaysActual:
+                        return new DateTime(Year, Month, Day).DayOfYear;
+                    default:
+                        throw new NotSupportedException();
+                }
             }
         }
 
@@ -22,46 +34,81 @@ namespace FubarDev.Afa
         {
             get
             {
-                return Year * 360 + DayOfYear;
+                switch (Precision)
+                {
+                    case AfaDatePrecision.Days30:
+                        return (Year - _startDate.Year) * 360 + DayOfYear;
+                    case AfaDatePrecision.DaysActual:
+                        return (new DateTime(Year, Month, Day) - _startDate).Days;
+                    default:
+                        throw new NotSupportedException();
+                }
             }
         }
 
-        public AfaDateRounding RoundingMode { get; private set; }
+        public AfaDatePrecision Precision { get; private set; }
 
-        public AfaDate(DateTime dt, AfaDateRounding roundingMode)
-            : this(dt.Year, dt.Month, dt.Day, roundingMode)
+        public AfaDate(DateTime dt, AfaDatePrecision precision = DefaultPrecision)
+            : this(dt.Year, dt.Month, dt.Day, precision)
         {
         }
 
-        public AfaDate(int year, int month, int day, AfaDateRounding roundingMode)
+        public AfaDate(int year, int month, int day, AfaDatePrecision precision = DefaultPrecision)
             : this()
         {
+            // Zuerst das Datum glatt ziehen
+            Year = year;
+            Month = month;
+            Day = day;
+
+            var tmp = CalculateDateActual(0, 0, 0);
+            
+            // Dann die gewünschte Präzision verwenden
+            Precision = precision;
+
+            year = tmp.Year;
+            month = tmp.Month;
+            day = tmp.Day;
+
             FixDate(ref year, ref month, ref day);
 
-            RoundingMode = roundingMode;
             Year = year;
             Month = month;
             Day = day;
         }
 
-        public static AfaDate GetEndOfMonth(int year, int month)
+        public static AfaDate GetEndOfMonth(int year, int month, AfaDatePrecision precision = DefaultPrecision)
         {
-            return new AfaDate(year, month, 30, AfaDateRounding.Day);
+            var dt = new DateTime(year, month, 1).AddMonths(1).AddDays(-1);
+            return new AfaDate(dt, precision);
         }
 
-        public static AfaDate GetBeginOfMonth(int year, int month)
+        public static AfaDate GetBeginOfMonth(int year, int month, AfaDatePrecision precision = DefaultPrecision)
         {
-            return new AfaDate(year, month, 1, AfaDateRounding.Day);
+            return new AfaDate(year, month, 1, precision);
         }
 
-        private static void FixDate(ref int year, ref int month, ref int day)
+        private void FixDate(ref int year, ref int month, ref int day)
         {
-            if (day > 31)
-                day = 30;
+            switch (Precision)
+            {
+                case AfaDatePrecision.Days30:
+                    if (day > 31)
+                        day = 30;
+                    break;
+                case AfaDatePrecision.DaysActual:
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
-        private static void CalculateDate(ref int year, ref int month, ref int day)
+        private AfaDate CalculateDate360(int addYear, int addMonth, int addDay)
         {
+            var day = Day + addDay;
+            var month = Month + addMonth;
+            var year = Year + addYear;
+
             month += day / 30;
             day %= 30;
 
@@ -77,13 +124,37 @@ namespace FubarDev.Afa
                 month += 12;
                 --year;
             }
+
+            return new AfaDate(year, month, day, Precision);
+        }
+
+        private AfaDate CalculateDateActual(int addYear, int addMonth, int addDay)
+        {
+            var dt = new DateTime(Year, Month, Day)
+                .AddYears(addYear)
+                .AddMonths(addMonth)
+                .AddDays(addDay);
+            return new AfaDate(dt.Year, dt.Month, dt.Day, Precision);
+        }
+
+        private AfaDate CalculateDate(int addYear, int addMonth, int addDay)
+        {
+            switch (Precision)
+            {
+                case AfaDatePrecision.Days30:
+                    return CalculateDate360(addYear, addMonth, addDay);
+                case AfaDatePrecision.DaysActual:
+                    return CalculateDateActual(addYear, addMonth, addDay);
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         public int CompareTo(AfaDate other)
         {
-            if (this.RoundingMode != other.RoundingMode)
-                throw new InvalidOperationException("Both dates must be of the same rounding mode!");
-            return this.ToNormalizedDate().TotalDays.CompareTo(other.ToNormalizedDate().TotalDays);
+            if (this.Precision != other.Precision)
+                throw new InvalidOperationException("Both dates must be of the same precision!");
+            return this.CompareTo(other.TotalDays);
         }
 
         public int CompareTo(object obj)
@@ -116,36 +187,20 @@ namespace FubarDev.Afa
 
         public AfaDate AddDays(int days)
         {
-            var day = Day + days;
-            var month = Month;
-            var year = Year;
-            CalculateDate(ref year, ref month, ref day);
-            return new AfaDate(year, month, day, RoundingMode);
+            return CalculateDate(0, 0, days);
         }
 
         public AfaDate AddMonths(double months)
         {
-            var days = (int)(GetFraction(months) * 30);
-
-            var day = Day + days;
-            var month = Month + (int)months;
-            var year = Year;
-            CalculateDate(ref year, ref month, ref day);
-            
-            return new AfaDate(year, month, day, RoundingMode);
+            var days = GetFraction(months) * 30;
+            return CalculateDate(0, (int)months, (int)days);
         }
 
         public AfaDate AddYears(double years)
         {
             var months = GetFraction(years) * 12;
             var days = GetFraction(months) * 30;
-
-            var day = Day + (int)days;
-            var month = Month + (int)months;
-            var year = Year + (int)years;
-            CalculateDate(ref year, ref month, ref day);
-
-            return new AfaDate(year, month, day, RoundingMode);
+            return CalculateDate((int)years, (int)months, (int)days);
         }
 
         public AfaDate Add(TimeSpan timespan)
@@ -155,9 +210,9 @@ namespace FubarDev.Afa
 
         public static TimeSpan operator -(AfaDate d1, AfaDate d2)
         {
-            if (d1.RoundingMode != d2.RoundingMode)
-                throw new InvalidOperationException("Both dates must be of the same rounding mode!");
-            return TimeSpan.FromDays(d1.ToNormalizedDate().TotalDays - d2.ToNormalizedDate().TotalDays);
+            if (d1.Precision != d2.Precision)
+                throw new InvalidOperationException("Both dates must be of the same precision!");
+            return TimeSpan.FromDays(d1.TotalDays - d2.TotalDays);
         }
 
         public static AfaDate operator -(AfaDate d, TimeSpan t)
@@ -212,29 +267,34 @@ namespace FubarDev.Afa
             return new DateTime(d.Value.Year, d.Value.Month, d.Value.Day);
         }
 
-        public AfaDate ToNormalizedDate()
+        public AfaDate Round(AfaDateRounding mode)
         {
             AfaDate result;
-            switch (RoundingMode)
+            switch (mode)
             {
                 case AfaDateRounding.Day:
                     result = this;
                     break;
-                case AfaDateRounding.HalfMonth:
-                    result = new AfaDate(Year, Month, 1, AfaDateRounding.Day);
+                case AfaDateRounding.Month:
+                    result = new AfaDate(Year, Month, 1, Precision);
                     if (Day >= 15)
                         result = result.AddMonths(1);
                     break;
-                case AfaDateRounding.Month:
-                    result = new AfaDate(Year, Month, 1, AfaDateRounding.Day);
+                case AfaDateRounding.BeginOfMonth:
+                    result = new AfaDate(Year, Month, 1, Precision);
                     break;
                 case AfaDateRounding.HalfYear:
-                    result = new AfaDate(Year, 1, 1, AfaDateRounding.Day);
                     if (Month >= 7)
-                        result = result.AddYears(1);
+                    {
+                        result = new AfaDate(Year, 7, 1, Precision);
+                    }
+                    else
+                    {
+                        result = new AfaDate(Year, 1, 1, Precision);
+                    }
                     break;
-                case AfaDateRounding.Year:
-                    result = new AfaDate(Year, 1, 1, AfaDateRounding.Day);
+                case AfaDateRounding.BeginOfYear:
+                    result = new AfaDate(Year, 1, 1, Precision);
                     break;
                 default:
                     throw new NotSupportedException();

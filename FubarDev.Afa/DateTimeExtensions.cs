@@ -8,16 +8,23 @@ namespace FubarDev.Afa
 {
     public static class DateTimeExtensions
     {
-        public static AfaDate ToAfaDate(this DateTime d, AfaDateRounding precision)
+        public static AfaDate ToAfaDate(this DateTime d, AfaDatePrecision precision)
         {
             return new AfaDate(d, precision);
         }
 
-        public static AfaDate? ToAfaDate(this DateTime? d, AfaDateRounding precision)
+        public static AfaDate? ToAfaDate(this DateTime? d, AfaDatePrecision precision)
         {
             if (d == null)
                 return null;
             return new AfaDate(d.Value, precision);
+        }
+
+        public static AfaDate? Round(this AfaDate? d, AfaDateRounding mode)
+        {
+            if (d == null)
+                return null;
+            return d.Value.Round(mode);
         }
     }
 }

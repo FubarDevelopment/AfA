@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AfaDate.cs" />
+    <Compile Include="AfaDatePrecision.cs" />
     <Compile Include="AfaDateRounding.cs" />
     <Compile Include="CalculationData.cs" />
     <Compile Include="CalculationMethods\ArithmetischProgressiv.cs" />

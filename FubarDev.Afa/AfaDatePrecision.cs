@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace FubarDev.Afa
 {
-    public enum AfaDateRounding
+    public enum AfaDatePrecision
     {
-        Day,
-        Month,
-        BeginOfMonth,
-        HalfYear,
-        BeginOfYear,
+        Days30,
+        DaysActual,
     }
 }

@@ -41,17 +41,17 @@ namespace FubarDev.Afa
                 ? Entities.Abschreibungsart.GWG
                 : abschreibung.Abschreibungsart);
 
-            var precision = (abschreibung.GenauesDatum ? AfaDateRounding.Day : AfaDateRounding.HalfYear);
+            var rounding = (abschreibung.GenauesDatum ? AfaDateRounding.Day : AfaDateRounding.HalfYear);
+            var precision = AfaDatePrecision.Days30;
 
-            var zugangsdatum = anlage.Anschaffungsdatum.ToAfaDate(precision);
-            var abgangsdatum = anlage.Abgangsdatum.ToAfaDate(precision);
+            var zugangsdatum = anlage.Anschaffungsdatum.ToAfaDate(precision).Round(rounding);
+            var abgangsdatum = anlage.Abgangsdatum.ToAfaDate(precision).Round(rounding);
 
             var nutzungsdauer = (decimal)abschreibung.Nutzungsdauer.GetValueOrDefault();
             var anschaffungswert = anlage.Anschaffungswert;
 
             if (abschreibung.Typ != Entities.AfaTyp.Normal)
             {
-                zugangsdatum = NormalizeDate(abschreibung, zugangsdatum);
                 var daysSinceBuy = StartDate - zugangsdatum;
                 var remainingDays = nutzungsdauer * 360 - daysSinceBuy.Days;
                 nutzungsdauer = remainingDays / 360;
@@ -65,11 +65,11 @@ namespace FubarDev.Afa
                 case Entities.AfaTyp.Abschreibung:
                     System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
                     zugangsdatum = AfaDate.GetEndOfMonth(Year - 1, 12);
-                    abgangsdatum = abschreibung.SonderAfaDatum.GetValueOrDefault().ToAfaDate(precision);
+                    abgangsdatum = abschreibung.SonderAfaDatum.Value.ToAfaDate(precision).Round(rounding);
                     break;
                 case Entities.AfaTyp.Zuschreibung:
                     System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
-                    zugangsdatum = abschreibung.SonderAfaDatum.GetValueOrDefault().ToAfaDate(precision);
+                    zugangsdatum = abschreibung.SonderAfaDatum.Value.ToAfaDate(precision).Round(rounding);
                     abgangsdatum = AfaDate.GetBeginOfMonth(Year + 1, 1);
                     break;
             }
@@ -81,13 +81,6 @@ namespace FubarDev.Afa
             {
                 var percentMax = abschreibung.AbschreibungProzent;
             }
-        }
-
-        private static AfaDate NormalizeDate(Entities.Abschreibung abschreibung, AfaDate date)
-        {
-            if (abschreibung.GenauesDatum)
-                return date;
-            return new AfaDate(date.Year, (date.Month < 6) ? 1 : 7, 1, AfaDateRounding.HalfYear);
         }
     }
 }
