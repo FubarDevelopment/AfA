@@ -38,5 +38,21 @@ namespace FubarDev.Afa.Tests.CalculationMethods
             TestResult(rounding.Calculate(calc, data, 4), 27507, 14527);
             TestResult(rounding.Calculate(calc, data, 5), 18000, 9507);
         }
+
+        [Fact]
+        public void TestGeometrischDegressiv2()
+        {
+            var data = new CalculationData(60000, 10678.71m, 6);
+            var rounding = new FullValueRounding(2);
+            var calc = new GeometrischDegressiv();
+
+            TestResult(rounding.Calculate(calc, data, 0), 60000.00m, 0);
+            TestResult(rounding.Calculate(calc, data, 1), 45000.00m, 15000.00m);
+            TestResult(rounding.Calculate(calc, data, 2), 33750.00m, 11250.00m);
+            TestResult(rounding.Calculate(calc, data, 3), 25312.50m, 8437.50m);
+            TestResult(rounding.Calculate(calc, data, 4), 18984.37m, 6328.13m);
+            TestResult(rounding.Calculate(calc, data, 5), 14238.28m, 4746.09m);
+            TestResult(rounding.Calculate(calc, data, 6), 10678.71m, 3559.57m);
+        }
     }
 }

@@ -4,6 +4,13 @@ namespace FubarDev.Afa.CalculationRoundings
 {
     public class FullValueRounding : ICalculationRounding
     {
+        private readonly int _decimals;
+
+        public FullValueRounding(int decimals = 0)
+        {
+            _decimals = decimals;
+        }
+
         public CalculationResult Calculate(ICalculationMethod method, CalculationData data, int period)
         {
             if (period < 0 || period > data.DepreciationRange)
@@ -25,8 +32,8 @@ namespace FubarDev.Afa.CalculationRoundings
                 resultOld = method.CalculateDepreciation(data, period - 1);
             }
 
-            var remainingValue = Math.Round(result.RemainingValue);
-            var remainingValueOld = Math.Round(resultOld.RemainingValue);
+            var remainingValue = Math.Round(result.RemainingValue, _decimals);
+            var remainingValueOld = Math.Round(resultOld.RemainingValue, _decimals);
 
             return new CalculationResult(period, remainingValueOld - remainingValue, remainingValue);
         }
