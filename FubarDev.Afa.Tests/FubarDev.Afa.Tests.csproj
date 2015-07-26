@@ -56,11 +56,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationMethods\ArithmetischDegressiv.cs" />
-    <Compile Include="CalculationMethods\ArithmetischProgressiv.cs" />
-    <Compile Include="CalculationMethods\GeometrischDegressiv.cs" />
-    <Compile Include="CalculationMethods\GeometrischProgressiv.cs" />
-    <Compile Include="CalculationMethods\Linear.cs" />
+    <Compile Include="CalculationMethods\ArithmetischDegressivTest.cs" />
+    <Compile Include="CalculationMethods\ArithmetischProgressivTest.cs" />
+    <Compile Include="CalculationMethods\GeometrischDegressivTest.cs" />
+    <Compile Include="CalculationMethods\GeometrischProgressivTest.cs" />
+    <Compile Include="CalculationMethods\LinearTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

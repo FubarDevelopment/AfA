@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using FubarDev.Afa.DatePrecisions;
+
 namespace FubarDev.Afa
 {
-    public class Calculator
+    public class Calculator<T> where T : IAfaDatePrecisionHandler
     {
+        private readonly T _handler;
+
         public int Year { get; private set; }
-        public AfaDate StartDate { get; private set; }
-        public AfaDate EndDate { get; private set; }
+        public AfaDate<T> StartDate { get; private set; }
+        public AfaDate<T> EndDate { get; private set; }
 
         public EventHandler<GwgAccountEventArgs> GwgAccount;
 
-        public Calculator(int year)
+        public Calculator(int year, T handler)
         {
+            _handler = handler;
             Year = year;
-            StartDate = AfaDate.GetBeginOfMonth(year, 1);
-            EndDate = AfaDate.GetEndOfMonth(year, 12);
+            StartDate = new AfaDate<T>(year, 1, 1, _handler);
+            EndDate = new AfaDate<T>(year, 12, 1, _handler).EndOfMonth;
         }
 
         protected virtual bool OnGwgAccount(string account, bool isGwg)
@@ -42,7 +47,7 @@ namespace FubarDev.Afa
                 : abschreibung.Abschreibungsart);
 
             var rounding = (abschreibung.GenauesDatum ? AfaDateRounding.Day : AfaDateRounding.HalfYear);
-            var precision = AfaDatePrecision.Days30;
+            var precision = AfaDatePrecision30.Default;
 
             var zugangsdatum = anlage.Anschaffungsdatum.ToAfaDate(precision).Round(rounding);
             var abgangsdatum = anlage.Abgangsdatum.ToAfaDate(precision).Round(rounding);
@@ -52,7 +57,7 @@ namespace FubarDev.Afa
 
             if (abschreibung.Typ != Entities.AfaTyp.Normal)
             {
-                var daysSinceBuy = StartDate - zugangsdatum;
+                var daysSinceBuy = new AfaDate<AfaDatePrecision30>(Year, 1, 1, precision) - zugangsdatum;
                 var remainingDays = nutzungsdauer * 360 - daysSinceBuy.Days;
                 nutzungsdauer = remainingDays / 360;
 
@@ -64,13 +69,13 @@ namespace FubarDev.Afa
             {
                 case Entities.AfaTyp.Abschreibung:
                     System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
-                    zugangsdatum = AfaDate.GetEndOfMonth(Year - 1, 12);
+                    zugangsdatum = new AfaDate<AfaDatePrecision30>(Year - 1, 12, 1, precision).EndOfMonth;
                     abgangsdatum = abschreibung.SonderAfaDatum.Value.ToAfaDate(precision).Round(rounding);
                     break;
                 case Entities.AfaTyp.Zuschreibung:
                     System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
                     zugangsdatum = abschreibung.SonderAfaDatum.Value.ToAfaDate(precision).Round(rounding);
-                    abgangsdatum = AfaDate.GetBeginOfMonth(Year + 1, 1);
+                    abgangsdatum = new AfaDate<AfaDatePrecision30>(Year + 1, 1, 1, precision);
                     break;
             }
 

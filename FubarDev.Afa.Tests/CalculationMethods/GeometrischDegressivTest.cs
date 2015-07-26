@@ -1,12 +1,13 @@
 ﻿using System;
 
+using FubarDev.Afa.CalculationMethods;
 using FubarDev.Afa.CalculationRoundings;
 
 using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    public class GeometrischDegressiv
+    public class GeometrischDegressivTest
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {

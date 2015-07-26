@@ -1,177 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+using NodaTime;
 
 namespace FubarDev.Afa
 {
-    public struct AfaDate : IComparable<AfaDate>, IComparable, IEquatable<AfaDate>
+    public struct AfaDate<T> : IComparable<AfaDate<T>>, IComparable, IEquatable<AfaDate<T>>
+        where T : IAfaDatePrecisionHandler
     {
-        private static readonly DateTime _startDate = new DateTime(1753, 1, 1);
+        private readonly IAfaDatePrecisionHandler _handler;
 
-        public const AfaDatePrecision DefaultPrecision = AfaDatePrecision.Days30;
+        public int Year { get; }
+        public int Month { get; }
+        public int Day { get; }
+        public int DayOfYear => _handler.GetDayOfYear(new LocalDate(Year, Month, Day));
 
-        public int Year { get; private set; }
-        public int Month { get; private set; }
-        public int Day { get; private set; }
-        public int DayOfYear
-        {
-            get
-            {
-                switch (Precision)
-                {
-                    case AfaDatePrecision.Days30:
-                        return (Month - 1) * 30 + Day;
-                    case AfaDatePrecision.DaysActual:
-                        return new DateTime(Year, Month, Day).DayOfYear;
-                    default:
-                        throw new NotSupportedException();
-                }
-            }
-        }
+        public long TotalDays => _handler.GetTotalDays(new LocalDate(Year, Month, Day));
 
-        public int TotalDays
-        {
-            get
-            {
-                switch (Precision)
-                {
-                    case AfaDatePrecision.Days30:
-                        return (Year - _startDate.Year) * 360 + DayOfYear;
-                    case AfaDatePrecision.DaysActual:
-                        return (new DateTime(Year, Month, Day) - _startDate).Days;
-                    default:
-                        throw new NotSupportedException();
-                }
-            }
-        }
+        public AfaDate<T> BeginOfMonth => new AfaDate<T>(new LocalDate(Year, Month, 1), _handler);
 
-        public AfaDatePrecision Precision { get; private set; }
+        public AfaDate<T> EndOfMonth => new AfaDate<T>(_handler.Add(new LocalDate(Year, Month, 1), 0, 1, -1), _handler);
 
-        public AfaDate(DateTime dt, AfaDatePrecision precision = DefaultPrecision)
-            : this(dt.Year, dt.Month, dt.Day, precision)
+        public AfaDate(LocalDate dt, IAfaDatePrecisionHandler handler)
+            : this(dt.Year, dt.Month, dt.Day, handler)
         {
         }
 
-        public AfaDate(int year, int month, int day, AfaDatePrecision precision = DefaultPrecision)
+        public AfaDate(int year, int month, int day, IAfaDatePrecisionHandler handler)
             : this()
         {
-            // Zuerst das Datum glatt ziehen
-            Year = year;
-            Month = month;
-            Day = day;
+            _handler = handler;
 
-            var tmp = CalculateDateActual(0, 0, 0);
-            
-            // Dann die gewünschte Präzision verwenden
-            Precision = precision;
+            var dt = handler.Fix(new LocalDate(year, month, day));
 
-            year = tmp.Year;
-            month = tmp.Month;
-            day = tmp.Day;
-
-            FixDate(ref year, ref month, ref day);
-
-            Year = year;
-            Month = month;
-            Day = day;
+            Year = dt.Year;
+            Month = dt.Month;
+            Day = dt.Day;
         }
 
-        public static AfaDate GetEndOfMonth(int year, int month, AfaDatePrecision precision = DefaultPrecision)
+        public int CompareTo(AfaDate<T> other)
         {
-            var dt = new DateTime(year, month, 1).AddMonths(1).AddDays(-1);
-            return new AfaDate(dt, precision);
-        }
-
-        public static AfaDate GetBeginOfMonth(int year, int month, AfaDatePrecision precision = DefaultPrecision)
-        {
-            return new AfaDate(year, month, 1, precision);
-        }
-
-        private void FixDate(ref int year, ref int month, ref int day)
-        {
-            switch (Precision)
-            {
-                case AfaDatePrecision.Days30:
-                    if (day > 31)
-                        day = 30;
-                    break;
-                case AfaDatePrecision.DaysActual:
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        private AfaDate CalculateDate360(int addYear, int addMonth, int addDay)
-        {
-            var day = Day + addDay;
-            var month = Month + addMonth;
-            var year = Year + addYear;
-
-            month += day / 30;
-            day %= 30;
-
-            if (day < 0)
-            {
-                day += 30;
-                --month;
-            }
-            year += month / 12;
-            month %= 12;
-            if (month < 0)
-            {
-                month += 12;
-                --year;
-            }
-
-            return new AfaDate(year, month, day, Precision);
-        }
-
-        private AfaDate CalculateDateActual(int addYear, int addMonth, int addDay)
-        {
-            var dt = new DateTime(Year, Month, Day)
-                .AddYears(addYear)
-                .AddMonths(addMonth)
-                .AddDays(addDay);
-            return new AfaDate(dt.Year, dt.Month, dt.Day, Precision);
-        }
-
-        private AfaDate CalculateDate(int addYear, int addMonth, int addDay)
-        {
-            switch (Precision)
-            {
-                case AfaDatePrecision.Days30:
-                    return CalculateDate360(addYear, addMonth, addDay);
-                case AfaDatePrecision.DaysActual:
-                    return CalculateDateActual(addYear, addMonth, addDay);
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        public int CompareTo(AfaDate other)
-        {
-            if (this.Precision != other.Precision)
-                throw new InvalidOperationException("Both dates must be of the same precision!");
-            return this.CompareTo(other.TotalDays);
+            return CompareTo(other.TotalDays);
         }
 
         public int CompareTo(object obj)
         {
             if (obj == null)
                 return 1;
-            return CompareTo((AfaDate)obj);
+            return CompareTo((AfaDate<T>)obj);
         }
 
-        public bool Equals(AfaDate other)
+        public bool Equals(AfaDate<T> other)
         {
             return CompareTo(other) == 0;
         }
 
         public override bool Equals(object obj)
         {
-            return Equals((AfaDate)obj);
+            return Equals((AfaDate<T>)obj);
         }
 
         public override int GetHashCode()
@@ -179,122 +64,111 @@ namespace FubarDev.Afa
             return TotalDays.GetHashCode();
         }
 
-        static double GetFraction(double v)
+        public AfaDate<T> AddDays(long days)
         {
-            double floor = Math.Floor(v) + (v < 0 ? 1 : 0);
-            return v - floor;
+            return new AfaDate<T>(_handler.Add(new LocalDate(Year, Month, Day), 0, 0, days), _handler);
         }
 
-        public AfaDate AddDays(int days)
+        public AfaDate<T> AddMonths(long months)
         {
-            return CalculateDate(0, 0, days);
+            return new AfaDate<T>(_handler.Add(new LocalDate(Year, Month, Day), 0, months, 0), _handler);
         }
 
-        public AfaDate AddMonths(double months)
+        public AfaDate<T> AddYears(long years)
         {
-            var days = GetFraction(months) * 30;
-            return CalculateDate(0, (int)months, (int)days);
+            return new AfaDate<T>(_handler.Add(new LocalDate(Year, Month, Day), years, 0, 0), _handler);
         }
 
-        public AfaDate AddYears(double years)
+        public AfaDate<T> Add(Period period)
         {
-            var months = GetFraction(years) * 12;
-            var days = GetFraction(months) * 30;
-            return CalculateDate((int)years, (int)months, (int)days);
+            return AddDays(period.Days);
         }
 
-        public AfaDate Add(TimeSpan timespan)
+        public static Period operator -(AfaDate<T> d1, AfaDate<T> d2)
         {
-            return AddDays((int)timespan.TotalDays);
+            return Period.FromDays(d1.TotalDays - d2.TotalDays);
         }
 
-        public static TimeSpan operator -(AfaDate d1, AfaDate d2)
+        public static AfaDate<T> operator -(AfaDate<T> d, Period t)
         {
-            if (d1.Precision != d2.Precision)
-                throw new InvalidOperationException("Both dates must be of the same precision!");
-            return TimeSpan.FromDays(d1.TotalDays - d2.TotalDays);
+            return d.AddDays(-(int)t.Days);
         }
 
-        public static AfaDate operator -(AfaDate d, TimeSpan t)
-        {
-            return d.AddDays(-(int)t.TotalDays);
-        }
-
-        public static AfaDate operator +(AfaDate d, TimeSpan t)
+        public static AfaDate<T> operator +(AfaDate<T> d, Period t)
         {
             return d.Add(t);
         }
 
-        public static bool operator ==(AfaDate d1, AfaDate d2)
+        public static bool operator ==(AfaDate<T> d1, AfaDate<T> d2)
         {
             return d1.CompareTo(d2) == 0;
         }
 
-        public static bool operator >(AfaDate d1, AfaDate d2)
+        public static bool operator >(AfaDate<T> d1, AfaDate<T> d2)
         {
             return d1.CompareTo(d2) > 0;
         }
 
-        public static bool operator >=(AfaDate d1, AfaDate d2)
+        public static bool operator >=(AfaDate<T> d1, AfaDate<T> d2)
         {
             return d1.CompareTo(d2) >= 0;
         }
 
-        public static bool operator !=(AfaDate d1, AfaDate d2)
+        public static bool operator !=(AfaDate<T> d1, AfaDate<T> d2)
         {
             return d1.CompareTo(d2) != 0;
         }
 
-        public static bool operator <(AfaDate d1, AfaDate d2)
+        public static bool operator <(AfaDate<T> d1, AfaDate<T> d2)
         {
             return d1.CompareTo(d2) < 0;
         }
 
-        public static bool operator <=(AfaDate d1, AfaDate d2)
+        public static bool operator <=(AfaDate<T> d1, AfaDate<T> d2)
         {
             return d1.CompareTo(d2) <= 0;
         }
 
-        public static implicit operator DateTime(AfaDate d)
+        public static implicit operator LocalDate(AfaDate<T> d)
         {
-            return new DateTime(d.Year, d.Month, d.Day);
+            return new LocalDate(d.Year, d.Month, d.Day);
         }
 
-        public static implicit operator DateTime?(AfaDate? d)
+        public static implicit operator LocalDate? (AfaDate<T>? d)
         {
             if (!d.HasValue)
                 return null;
-            return new DateTime(d.Value.Year, d.Value.Month, d.Value.Day);
+            return new LocalDate(d.Value.Year, d.Value.Month, d.Value.Day);
         }
 
-        public AfaDate Round(AfaDateRounding mode)
+        public AfaDate<T> Round(AfaDateRounding mode)
         {
-            AfaDate result;
+            AfaDate<T> result;
             switch (mode)
             {
                 case AfaDateRounding.Day:
                     result = this;
                     break;
                 case AfaDateRounding.Month:
-                    result = new AfaDate(Year, Month, 1, Precision);
+                    result = new AfaDate<T>(Year, Month, 1, _handler);
                     if (Day >= 15)
                         result = result.AddMonths(1);
                     break;
                 case AfaDateRounding.BeginOfMonth:
-                    result = new AfaDate(Year, Month, 1, Precision);
+                    result = new AfaDate<T>(Year, Month, 1, _handler);
                     break;
                 case AfaDateRounding.HalfYear:
                     if (Month >= 7)
                     {
-                        result = new AfaDate(Year, 7, 1, Precision);
+                        result = new AfaDate<T>(Year, 7, 1, _handler);
                     }
                     else
                     {
-                        result = new AfaDate(Year, 1, 1, Precision);
+                        result = new AfaDate<T>(Year, 1, 1, _handler);
                     }
                     break;
                 case AfaDateRounding.BeginOfYear:
-                    result = new AfaDate(Year, 1, 1, Precision);
+                    result = new AfaDate<T>(Year, 1, 1, _handler);
                     break;
                 default:
                     throw new NotSupportedException();

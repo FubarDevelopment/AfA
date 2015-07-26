@@ -1,30 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using NodaTime;
 
 namespace FubarDev.Afa
 {
     public static class DateTimeExtensions
     {
-        public static AfaDate ToAfaDate(this DateTime d, AfaDatePrecision precision)
+        public static AfaDate<T> ToAfaDate<T>(this DateTime d, T handler) where T : IAfaDatePrecisionHandler
         {
-            return new AfaDate(d, precision);
+            return new AfaDate<T>(LocalDateTime.FromDateTime(d).Date, handler);
         }
 
-        public static AfaDate? ToAfaDate(this DateTime? d, AfaDatePrecision precision)
+        public static AfaDate<T>? ToAfaDate<T>(this DateTime? d, T handler) where T : IAfaDatePrecisionHandler
         {
             if (d == null)
                 return null;
-            return new AfaDate(d.Value, precision);
+            return new AfaDate<T>(LocalDateTime.FromDateTime(d.Value).Date, handler);
         }
 
-        public static AfaDate? Round(this AfaDate? d, AfaDateRounding mode)
+        public static AfaDate<T> Round<T>(this AfaDate<T> d, AfaDateRounding mode) where T : IAfaDatePrecisionHandler
         {
-            if (d == null)
-                return null;
-            return d.Value.Round(mode);
+            return d.Round(mode);
+        }
+
+        public static AfaDate<T>? Round<T>(this AfaDate<T>? d, AfaDateRounding mode) where T : IAfaDatePrecisionHandler
+        {
+            return d?.Round(mode);
         }
     }
 }
