@@ -1,5 +1,7 @@
 ﻿using System;
 
+using FubarDev.Afa.CalculationRoundings;
+
 using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
@@ -15,9 +17,9 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         [Fact]
         public void TestArithmetischProgressiv1()
         {
-            var data = new Afa.CalculationData(150000, 18000, 5);
-            var rounding = new Afa.CalculationRoundings.FullValueRounding();
-            var calc = new Afa.CalculationMethods.ArithmetischProgressiv();
+            var data = new CalculationData(150000, 18000, 5);
+            var rounding = new FullValueRounding();
+            var calc = new ArithmetischProgressiv();
 
             TestResult(rounding.Calculate(calc, data, 0), 150000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 141200, 8800);

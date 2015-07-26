@@ -19,7 +19,7 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         {
             var data = new CalculationData(150000, 18000, 5);
             var rounding = new FullValueRounding();
-            var calc = new Afa.CalculationMethods.GeometrischDegressiv();
+            var calc = new GeometrischDegressiv();
 
             // Das waren die Werte aus dem Beispiel, doch die scheinen ungenau zu sein:
             // http://www.rechnungswesen-portal.de/Fachinfo/Anlagevermoegen/Geometrisch-degressive-Abschreibung.html

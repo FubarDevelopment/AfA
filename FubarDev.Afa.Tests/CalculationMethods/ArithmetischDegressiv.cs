@@ -19,7 +19,7 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         {
             var data = new CalculationData(150000, 18000, 5);
             var rounding = new FullValueRounding();
-            var calc = new Afa.CalculationMethods.ArithmetischDegressiv();
+            var calc = new ArithmetischDegressiv();
 
             TestResult(rounding.Calculate(calc, data, 0), 150000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 106000, 44000);

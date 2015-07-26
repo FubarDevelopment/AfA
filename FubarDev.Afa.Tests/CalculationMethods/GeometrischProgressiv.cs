@@ -19,7 +19,7 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         {
             var data = new CalculationData(150000, 18000, 5);
             var rounding = new FullValueRounding();
-            var calc = new Afa.CalculationMethods.GeometrischProgressiv();
+            var calc = new GeometrischProgressiv();
 
             TestResult(rounding.Calculate(calc, data, 0), 150000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 140493, 9507);
