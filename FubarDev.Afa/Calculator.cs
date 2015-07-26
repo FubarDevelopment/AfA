@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 
 using FubarDev.Afa.DatePrecisions;
+using FubarDev.Afa.Entities;
 
 namespace FubarDev.Afa
 {
@@ -33,7 +32,7 @@ namespace FubarDev.Afa
             return args.IsGwg;
         }
 
-        public void Calculate(Entities.Anlage anlage)
+        public void Calculate(Anlage anlage)
         {
             if (anlage.AktivesJahr != Year)
                 throw new InvalidOperationException("Das aktive Jahr für die Anlage stimmt nicht mit dem für die Berechnung gewählten Jahr überein.");
@@ -42,8 +41,8 @@ namespace FubarDev.Afa
 
             // Hier kann man GwG für ein Konto erzwingen
             var abschreibungsart =
-                (OnGwgAccount(anlage.Konto, abschreibung.Abschreibungsart == Entities.Abschreibungsart.GWG)
-                ? Entities.Abschreibungsart.GWG
+                (OnGwgAccount(anlage.Konto, abschreibung.Abschreibungsart == Abschreibungsart.GWG)
+                ? Abschreibungsart.GWG
                 : abschreibung.Abschreibungsart);
 
             var rounding = (abschreibung.GenauesDatum ? AfaDateRounding.Day : AfaDateRounding.HalfYear);
@@ -55,25 +54,25 @@ namespace FubarDev.Afa
             var nutzungsdauer = (decimal)abschreibung.Nutzungsdauer.GetValueOrDefault();
             var anschaffungswert = anlage.Anschaffungswert;
 
-            if (abschreibung.Typ != Entities.AfaTyp.Normal)
+            if (abschreibung.Typ != AfaTyp.Normal)
             {
                 var daysSinceBuy = new AfaDate<AfaDatePrecision30>(Year, 1, 1, precision) - zugangsdatum;
                 var remainingDays = nutzungsdauer * 360 - daysSinceBuy.Days;
                 nutzungsdauer = remainingDays / 360;
 
-                System.Diagnostics.Debug.Assert(abschreibung.SonderAfaBetrag != null);
+                Debug.Assert(abschreibung.SonderAfaBetrag != null);
 
                 anschaffungswert = abschreibung.SonderAfaBetrag.GetValueOrDefault();
             }
             switch (abschreibung.Typ)
             {
-                case Entities.AfaTyp.Abschreibung:
-                    System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
+                case AfaTyp.Abschreibung:
+                    Debug.Assert(abschreibung.SonderAfaDatum != null);
                     zugangsdatum = new AfaDate<AfaDatePrecision30>(Year - 1, 12, 1, precision).EndOfMonth;
                     abgangsdatum = abschreibung.SonderAfaDatum.Value.ToAfaDate(precision).Round(rounding);
                     break;
-                case Entities.AfaTyp.Zuschreibung:
-                    System.Diagnostics.Debug.Assert(abschreibung.SonderAfaDatum != null);
+                case AfaTyp.Zuschreibung:
+                    Debug.Assert(abschreibung.SonderAfaDatum != null);
                     zugangsdatum = abschreibung.SonderAfaDatum.Value.ToAfaDate(precision).Round(rounding);
                     abgangsdatum = new AfaDate<AfaDatePrecision30>(Year + 1, 1, 1, precision);
                     break;

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace FubarDev.Afa.CalculationMethods
 {
@@ -16,7 +13,7 @@ namespace FubarDev.Afa.CalculationMethods
         public CalculationResult CalculateDepreciation(CalculationData data, int period)
         {
             if (period < 1 || period > data.DepreciationRange)
-                throw new ArgumentOutOfRangeException("period", "The period must be greater than 0 and less than the value of depreciationRange.");
+                throw new ArgumentOutOfRangeException(nameof(period), "The period must be greater than 0 and less than the value of depreciationRange.");
 
             var factor = CalculateFactor(data);
 

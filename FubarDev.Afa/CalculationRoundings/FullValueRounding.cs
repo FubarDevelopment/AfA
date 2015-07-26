@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FubarDev.Afa.CalculationRoundings
 {
@@ -11,7 +7,7 @@ namespace FubarDev.Afa.CalculationRoundings
         public CalculationResult Calculate(ICalculationMethod method, CalculationData data, int period)
         {
             if (period < 0 || period > data.DepreciationRange)
-                throw new ArgumentOutOfRangeException("period", "The period must be greater or equal than 0 and less than the value of depreciationRange.");
+                throw new ArgumentOutOfRangeException(nameof(period), "The period must be greater or equal than 0 and less than the value of depreciationRange.");
 
             if (period == 0)
                 return new CalculationResult(period, 0, data.AcquisitionValue);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FubarDev.Afa
 {
@@ -11,9 +7,9 @@ namespace FubarDev.Afa
         public CalculationData(decimal acquisitionValue, decimal targetRemainingValue, int depreciationRange)
         {
             if (targetRemainingValue >= acquisitionValue)
-                throw new ArgumentOutOfRangeException("targetRemainingValue", "The target remaining value must be less than the value of acquisitionValue.");
+                throw new ArgumentOutOfRangeException(nameof(targetRemainingValue), "The target remaining value must be less than the value of acquisitionValue.");
             if (depreciationRange < 1)
-                throw new ArgumentOutOfRangeException("depreciationRange", "The depreciation range must be greater than 0.");
+                throw new ArgumentOutOfRangeException(nameof(depreciationRange), "The depreciation range must be greater than 0.");
 
             AcquisitionValue = acquisitionValue;
             TargetRemainingValue = targetRemainingValue;
