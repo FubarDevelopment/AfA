@@ -1,22 +1,24 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using FubarDev.Afa.CalculationRoundings;
+
+using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    [TestClass]
     public class ArithmetischDegressiv
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
-            Assert.AreEqual(expectedRemainingValue, result.RemainingValue);
-            Assert.AreEqual(expectedDepreciation, result.Depreciation);
+            Assert.Equal(expectedRemainingValue, result.RemainingValue);
+            Assert.Equal(expectedDepreciation, result.Depreciation);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestArithmetischDegressiv1()
         {
-            var data = new Afa.CalculationData(150000, 18000, 5);
-            var rounding = new Afa.CalculationRoundings.FullValueRounding();
+            var data = new CalculationData(150000, 18000, 5);
+            var rounding = new FullValueRounding();
             var calc = new Afa.CalculationMethods.ArithmetischDegressiv();
 
             TestResult(rounding.Calculate(calc, data, 0), 150000, 0);

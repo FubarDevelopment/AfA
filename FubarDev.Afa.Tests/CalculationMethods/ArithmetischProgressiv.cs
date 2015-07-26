@@ -1,18 +1,18 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    [TestClass]
     public class ArithmetischProgressiv
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
-            Assert.AreEqual(expectedRemainingValue, result.RemainingValue);
-            Assert.AreEqual(expectedDepreciation, result.Depreciation);
+            Assert.Equal(expectedRemainingValue, result.RemainingValue);
+            Assert.Equal(expectedDepreciation, result.Depreciation);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestArithmetischProgressiv1()
         {
             var data = new Afa.CalculationData(150000, 18000, 5);

@@ -1,22 +1,24 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using FubarDev.Afa.CalculationRoundings;
+
+using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    [TestClass]
     public class GeometrischDegressiv
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
-            Assert.AreEqual(expectedRemainingValue, result.RemainingValue);
-            Assert.AreEqual(expectedDepreciation, result.Depreciation);
+            Assert.Equal(expectedRemainingValue, result.RemainingValue);
+            Assert.Equal(expectedDepreciation, result.Depreciation);
         }
 
-        [TestMethod]
+        [Fact]
         public void TestGeometrischDegressiv1()
         {
-            var data = new Afa.CalculationData(150000, 18000, 5);
-            var rounding = new Afa.CalculationRoundings.FullValueRounding();
+            var data = new CalculationData(150000, 18000, 5);
+            var rounding = new FullValueRounding();
             var calc = new Afa.CalculationMethods.GeometrischDegressiv();
 
             // Das waren die Werte aus dem Beispiel, doch die scheinen ungenau zu sein:

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// Allgemeine Informationen über eine Assembly werden über folgende 
+// Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("FubarDev.Afa.Tests")]
@@ -10,17 +10,17 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FubarDev.Afa.Tests")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Wenn ComVisible auf "false" festgelegt wird, sind die Typen innerhalb dieser Assembly 
-// für COM-Komponenten unsichtbar.  Wenn Sie auf einen Typ in dieser Assembly von 
+// Durch Festlegen von ComVisible auf "false" werden die Typen in dieser Assembly unsichtbar 
+// für COM-Komponenten.  Wenn Sie auf einen Typ in dieser Assembly von 
 // COM aus zugreifen müssen, sollten Sie das ComVisible-Attribut für diesen Typ auf "True" festlegen.
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("feaf497c-0fee-4a58-8f1b-9d000906b9ab")]
+[assembly: Guid("c49cfb12-bf04-4e3e-af88-fbc293ef8113")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
@@ -30,7 +30,8 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
-// durch Einsatz von '*', wie in nachfolgendem Beispiel:
-// [Assembly: AssemblyVersion("1.0.*")]
+// übernehmen, indem Sie "*" eingeben:
+// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0.0")]
