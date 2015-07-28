@@ -5,7 +5,7 @@ namespace FubarDev.Afa.CalculationMethods
     /// <summary>
     /// Geometrisch-Degressive Abschreibung
     /// </summary>
-    public class GeometricDegressive : ICalculationMethod
+    public class GeometricDegressive : IDegressiveCalculationMethod
     {
         private decimal CalculateFactor(CalculationData data)
         {

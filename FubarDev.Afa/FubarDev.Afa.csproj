@@ -46,7 +46,10 @@
     <Compile Include="CalculationData.cs" />
     <Compile Include="CalculationMethods\Arithmetic.cs" />
     <Compile Include="CalculationMethods\ArithmeticProgressive.cs" />
+    <Compile Include="CalculationMethods\DegressiveToLinear.cs" />
     <Compile Include="CalculationMethods\GeometricProgressive.cs" />
+    <Compile Include="IDegressiveCalculationMethod.cs" />
+    <Compile Include="CalculationMethods\PercentDegressive.cs" />
     <Compile Include="CalculationResult.cs" />
     <Compile Include="CalculationMethods\ArithmeticDegressive.cs" />
     <Compile Include="CalculationMethods\GeometricDegressive.cs" />

@@ -61,6 +61,7 @@
     <Compile Include="CalculationMethods\GeometricDegressiveTest.cs" />
     <Compile Include="CalculationMethods\GeometrcProgressiveTest.cs" />
     <Compile Include="CalculationMethods\LinearTest.cs" />
+    <Compile Include="CalculationMethods\LinearToPercentTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

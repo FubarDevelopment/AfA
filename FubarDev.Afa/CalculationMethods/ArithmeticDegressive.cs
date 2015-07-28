@@ -5,7 +5,7 @@ namespace FubarDev.Afa.CalculationMethods
     /// <summary>
     /// Arithmetisch-Degressive Abschreibung
     /// </summary>
-    public class ArithmeticDegressive : ArithmeticProgressive
+    public class ArithmeticDegressive : ArithmeticProgressive, IDegressiveCalculationMethod
     {
         /// <summary>
         /// Berechnet die Gewichtung eines Abschreibungsjahres.
