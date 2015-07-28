@@ -8,6 +8,10 @@ namespace FubarDev.Afa.CalculationMethods
     /// </summary>
     public class DegressiveToLinear : ICalculationMethod
     {
+        /// <summary>
+        /// Initialisiert eine neue Instanz der <see cref="DegressiveToLinear"/> Klasse.
+        /// </summary>
+        /// <param name="degressiveMethod">Das degressive Verfahren, das zu Beginn zu benutzen ist</param>
         public DegressiveToLinear(IDegressiveCalculationMethod degressiveMethod)
         {
             DegressiveMethod = degressiveMethod;

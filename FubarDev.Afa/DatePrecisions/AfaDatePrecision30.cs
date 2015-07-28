@@ -17,6 +17,16 @@ namespace FubarDev.Afa.DatePrecisions
         public static AfaDatePrecision30 Default { get; } = new AfaDatePrecision30();
 
         /// <summary>
+        /// Ermittelt die Anzahl an Tagen für das angegeben Jahr
+        /// </summary>
+        /// <param name="year">Das Jahr für das die Anzahl an Tagen ermittelt werden soll</param>
+        /// <returns>Die Anzahl an Tagen für das Jahr</returns>
+        public int GetTotalDaysOfYear(int year)
+        {
+            return 360;
+        }
+
+        /// <summary>
         /// Addiert zu einem Datum (unter Berücksichtigung der geforderten Genauigkeit) die Anzahl an Jahren, Monaten und/oder Tagen.
         /// </summary>
         /// <param name="date">Das Datum zu dem die Jahre, Monate und Tage addiert werden sollen</param>
@@ -47,7 +57,14 @@ namespace FubarDev.Afa.DatePrecisions
                 --year;
             }
 
-            return new LocalDate((int)year, (int)month, (int)day);
+            var newYear = (int)year;
+            var newMonth = (int)month;
+            var newDay = (int)day;
+            var lastDayOfMonth = new LocalDate(newYear, newMonth, 1) + Period.FromMonths(1) - Period.FromDays(1);
+            if (lastDayOfMonth.Day < newDay)
+                newDay = lastDayOfMonth.Day;
+
+            return new LocalDate(newYear, newMonth, newDay);
         }
 
         /// <summary>

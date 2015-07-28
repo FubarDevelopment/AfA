@@ -11,6 +11,13 @@ namespace FubarDev.Afa
     public interface IAfaDatePrecisionHandler
     {
         /// <summary>
+        /// Ermittelt die Anzahl an Tagen für das angegeben Jahr
+        /// </summary>
+        /// <param name="year">Das Jahr für das die Anzahl an Tagen ermittelt werden soll</param>
+        /// <returns>Die Anzahl an Tagen für das Jahr</returns>
+        int GetTotalDaysOfYear(int year);
+
+        /// <summary>
         /// Ermittelt den Tag des Jahres
         /// </summary>
         /// <param name="date">Das lokale Datum, dessen Tag des Jahres ermittelt werden soll</param>

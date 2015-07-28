@@ -2,15 +2,29 @@
 
 namespace FubarDev.Afa.CalculationRoundings
 {
+    /// <summary>
+    /// Standard Rundungsverfahren (Verwendung von <see cref="Math.Round(decimal,int)"/>)
+    /// </summary>
     public class DefaultRounding : ICalculationRounding
     {
         private readonly int _decimals;
 
+        /// <summary>
+        /// Initialisiert eine neue Instanz der <see cref="DefaultRounding"/> Klasse.
+        /// </summary>
+        /// <param name="decimals">Die Anzahl der Nachkommastellen</param>
         public DefaultRounding(int decimals = 0)
         {
             _decimals = decimals;
         }
 
+        /// <summary>
+        /// Berechnet den Abschreibungs- und Restbuchwert und rundet das Ergebnis entsprechend der Implementation.
+        /// </summary>
+        /// <param name="method">Das Verfahren für die Abschreibungsberechnung</param>
+        /// <param name="data">Die Basis-Daten anhand derer der Abschreibungswert berechnet wird.</param>
+        /// <param name="period">Das Abrechnungsjahr (beginnend bei 0 = keine Abschreibung)</param>
+        /// <returns>Das Ergebnis der Berechnung und Rundung</returns>
         public CalculationResult Calculate(ICalculationMethod method, CalculationData data, int period)
         {
             if (period < 0 || period > data.DepreciationRange)
