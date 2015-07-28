@@ -57,6 +57,9 @@
     <Compile Include="DatePrecisions\AfaDatePrecisionActual.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DecimalMath.cs" />
+    <None Include="FubarDev.Afa.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="GwgAccountEventArgs.cs" />
     <Compile Include="IAfaDatePrecisionHandler.cs" />
     <Compile Include="ICalculationMethod.cs" />
