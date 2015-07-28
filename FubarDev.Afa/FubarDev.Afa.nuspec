@@ -6,12 +6,14 @@
     <title>AfA-Berechnung</title>
     <authors>Fubar Development Junker</authors>
     <owners>Fubar Development Junker</owners>
-    <licenseUrl>https://gitlab.com/FubarDevelopment/FubarDev.Afa/wikis/license</licenseUrl>
-    <projectUrl>https://gitlab.com/FubarDevelopment/FubarDev.Afa</projectUrl>
-    <iconUrl>https://gitlab.com/FubarDevelopment/FubarDev.Afa/raw/master/logo.png</iconUrl>
+    <licenseUrl>https://github.com/FubarDevelopment/AfA/wiki/license</licenseUrl>
+    <projectUrl>https://github.com/FubarDevelopment/AfA</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/FubarDevelopment/AfA/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Erste Version</releaseNotes>
+    <releaseNotes>- Prozentuale Berechnung hinzugefügt
+- Umstellung von degressiver auf lineare Berechnung
+- Umstellung auf GitHub</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>AfA Abschreibung Berechnung Absetzung Abnutzung</tags>
   </metadata>
