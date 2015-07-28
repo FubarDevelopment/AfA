@@ -2,11 +2,11 @@
 
 namespace FubarDev.Afa.CalculationRoundings
 {
-    public class FullValueRounding : ICalculationRounding
+    public class DefaultRounding : ICalculationRounding
     {
         private readonly int _decimals;
 
-        public FullValueRounding(int decimals = 0)
+        public DefaultRounding(int decimals = 0)
         {
             _decimals = decimals;
         }

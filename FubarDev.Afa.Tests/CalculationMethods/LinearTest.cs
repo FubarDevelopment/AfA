@@ -19,7 +19,7 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestLinear1()
         {
             var data = new CalculationData(10000, 0, 5);
-            var rounding = new FullValueRounding();
+            var rounding = new DefaultRounding();
             var calc = new Linear();
 
             TestResult(rounding.Calculate(calc, data, 0), 10000, 0);

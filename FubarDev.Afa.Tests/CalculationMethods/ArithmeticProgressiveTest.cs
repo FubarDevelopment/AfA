@@ -7,7 +7,7 @@ using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    public class ArithmetischProgressivTest
+    public class ArithmeticProgressiveTest
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
@@ -19,8 +19,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestArithmetischProgressiv1()
         {
             var data = new CalculationData(150000, 18000, 5);
-            var rounding = new FullValueRounding();
-            var calc = new ArithmetischProgressiv();
+            var rounding = new DefaultRounding();
+            var calc = new ArithmeticProgressive();
 
             TestResult(rounding.Calculate(calc, data, 0), 150000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 141200, 8800);
@@ -34,8 +34,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestArithmetischProgressiv2()
         {
             var data = new CalculationData(420000, 0, 6);
-            var rounding = new FullValueRounding();
-            var calc = new ArithmetischProgressiv();
+            var rounding = new DefaultRounding();
+            var calc = new ArithmeticProgressive();
 
             TestResult(rounding.Calculate(calc, data, 0), 420000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 400000, 20000);

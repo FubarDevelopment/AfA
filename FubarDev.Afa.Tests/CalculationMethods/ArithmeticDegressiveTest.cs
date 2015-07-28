@@ -7,7 +7,7 @@ using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    public class ArithmetischDegressivTest
+    public class ArithmeticDegressiveTest
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
@@ -19,8 +19,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestArithmetischDegressiv1()
         {
             var data = new CalculationData(150000, 18000, 5);
-            var rounding = new FullValueRounding();
-            var calc = new ArithmetischDegressiv();
+            var rounding = new DefaultRounding();
+            var calc = new ArithmeticDegressive();
 
             TestResult(rounding.Calculate(calc, data, 0), 150000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 106000, 44000);
@@ -34,8 +34,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestArithmetischDegressiv2()
         {
             var data = new CalculationData(100000, 0, 10);
-            var rounding = new FullValueRounding(2);
-            var calc = new ArithmetischDegressiv();
+            var rounding = new DefaultRounding(2);
+            var calc = new ArithmeticDegressive();
 
             TestResult(rounding.Calculate(calc, data, 0), 100000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 81818.18m, 18181.82m);
@@ -54,8 +54,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestArithmetischDegressiv3()
         {
             var data = new CalculationData(42000, 0, 6);
-            var rounding = new FullValueRounding();
-            var calc = new ArithmetischDegressiv();
+            var rounding = new DefaultRounding();
+            var calc = new ArithmeticDegressive();
 
             TestResult(rounding.Calculate(calc, data, 0), 42000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 30000, 12000);

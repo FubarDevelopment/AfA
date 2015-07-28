@@ -143,37 +143,37 @@ namespace FubarDev.Afa
 
         public AfaDate<T> Round(AfaDateRounding mode)
         {
-            AfaDate<T> result;
+            LocalDate result;
             switch (mode)
             {
                 case AfaDateRounding.Day:
                     result = this;
                     break;
                 case AfaDateRounding.Month:
-                    result = new AfaDate<T>(Year, Month, 1, _handler);
+                    result = new LocalDate(Year, Month, 1);
                     if (Day >= 15)
-                        result = result.AddMonths(1);
+                        result = result + Period.FromMonths(1);
                     break;
                 case AfaDateRounding.BeginOfMonth:
-                    result = new AfaDate<T>(Year, Month, 1, _handler);
+                    result = new LocalDate(Year, Month, 1);
                     break;
                 case AfaDateRounding.HalfYear:
                     if (Month >= 7)
                     {
-                        result = new AfaDate<T>(Year, 7, 1, _handler);
+                        result = new LocalDate(Year, 7, 1);
                     }
                     else
                     {
-                        result = new AfaDate<T>(Year, 1, 1, _handler);
+                        result = new LocalDate(Year, 1, 1);
                     }
                     break;
                 case AfaDateRounding.BeginOfYear:
-                    result = new AfaDate<T>(Year, 1, 1, _handler);
+                    result = new LocalDate(Year, 1, 1);
                     break;
                 default:
                     throw new NotSupportedException();
             }
-            return result;
+            return new AfaDate<T>(result, _handler);
         }
     }
 }

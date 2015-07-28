@@ -7,7 +7,7 @@ using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    public class GeometrischProgressivTest
+    public class GeometrcProgressiveTest
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
@@ -19,8 +19,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestGeometrischProgressiv1()
         {
             var data = new CalculationData(150000, 18000, 5);
-            var rounding = new FullValueRounding();
-            var calc = new GeometrischProgressiv();
+            var rounding = new DefaultRounding();
+            var calc = new GeometricProgressive();
 
             TestResult(rounding.Calculate(calc, data, 0), 150000, 0);
             TestResult(rounding.Calculate(calc, data, 1), 140493, 9507);

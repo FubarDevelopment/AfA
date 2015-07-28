@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E381A534-55F4-4ABA-9207-A335A30C7075}</ProjectGuid>
@@ -13,7 +13,7 @@
     <DefaultLanguage>de-DE</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -44,14 +44,14 @@
     <Compile Include="AfaDate.cs" />
     <Compile Include="AfaDateRounding.cs" />
     <Compile Include="CalculationData.cs" />
-    <Compile Include="CalculationMethods\ArithmetischProgressiv.cs" />
-    <Compile Include="CalculationMethods\GeometrischProgressiv.cs" />
-    <Compile Include="CalculationMethods\WeightCalculationDelegate.cs" />
+    <Compile Include="CalculationMethods\Arithmetic.cs" />
+    <Compile Include="CalculationMethods\ArithmeticProgressive.cs" />
+    <Compile Include="CalculationMethods\GeometricProgressive.cs" />
     <Compile Include="CalculationResult.cs" />
-    <Compile Include="CalculationMethods\ArithmetischDegressiv.cs" />
-    <Compile Include="CalculationMethods\GeometrischDegressiv.cs" />
+    <Compile Include="CalculationMethods\ArithmeticDegressive.cs" />
+    <Compile Include="CalculationMethods\GeometricDegressive.cs" />
     <Compile Include="CalculationMethods\Linear.cs" />
-    <Compile Include="CalculationRoundings\FullValueRounding.cs" />
+    <Compile Include="CalculationRoundings\DefaultRounding.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="DatePrecisions\AfaDatePrecision30.cs" />
     <Compile Include="DatePrecisions\AfaDatePrecisionActual.cs" />

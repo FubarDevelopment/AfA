@@ -3,26 +3,33 @@ using System.Linq;
 
 namespace FubarDev.Afa.CalculationMethods
 {
-    public class ArithmetischProgressiv : ICalculationMethod
+    /// <summary>
+    /// Arithmetisch-Progressive Abschreibung
+    /// </summary>
+    public class ArithmeticProgressive : Arithmetic, ICalculationMethod
     {
-        public ArithmetischProgressiv()
-            : this((period, range) => period)
+        /// <summary>
+        /// Berechnet die Gewichtung eines Abschreibungsjahres.
+        /// </summary>
+        /// <param name="period">Gewichtung für das Jahr (beginnt mit 1)</param>
+        /// <param name="depreciationRange">Nutzungsdauer</param>
+        /// <returns>Gewichtung</returns>
+        public override int CalculateWeight(int period, int depreciationRange)
         {
-
+            return period;
         }
-
-        public ArithmetischProgressiv(WeightCalculationDelegate weightCalculator)
-        {
-            CalculateWeight = weightCalculator;
-        }
-
-        public WeightCalculationDelegate CalculateWeight { get; }
 
         private decimal CalculateFactor(CalculationData data, int maxParts)
         {
             return (data.AcquisitionValue - data.TargetRemainingValue) / maxParts;
         }
 
+        /// <summary>
+        /// Berechnung des Abschreibungs- und Restbuchwertes (<see cref="CalculationResult"/>) für das Abschreibungsjahr (<paramref name="period"/>).
+        /// </summary>
+        /// <param name="data">Die grundlegenden Daten für die Abschreibungsberechnung</param>
+        /// <param name="period">Das Abschreibungsjahr für das die Daten errechnet werden sollen.</param>
+        /// <returns>Die errechneten Abschreibungs- und Restbuchwerte</returns>
         public CalculationResult CalculateDepreciation(CalculationData data, int period)
         {
             if (period < 1 || period > data.DepreciationRange)

@@ -49,7 +49,7 @@ namespace FubarDev.Afa
             var precision = AfaDatePrecision30.Default;
 
             var zugangsdatum = anlage.Anschaffungsdatum.ToAfaDate(precision).Round(rounding);
-            var abgangsdatum = anlage.Abgangsdatum.ToAfaDate(precision).Round(rounding);
+            var abgangsdatum = anlage.Abgangsdatum.ToAfaDate(precision)?.Round(rounding);
 
             var nutzungsdauer = (decimal)abschreibung.Nutzungsdauer.GetValueOrDefault();
             var anschaffungswert = anlage.Anschaffungswert;

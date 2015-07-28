@@ -2,8 +2,17 @@
 
 namespace FubarDev.Afa
 {
+    /// <summary>
+    /// Die Grundlegenden Daten für eine Berechnung durch <see cref="ICalculationMethod"/>
+    /// </summary>
     public class CalculationData
     {
+        /// <summary>
+        /// Initialisiert eine neue Instanz der <see cref="CalculationData"/> Klasse.
+        /// </summary>
+        /// <param name="acquisitionValue">Anschaffungswert</param>
+        /// <param name="targetRemainingValue">Restbuchwert</param>
+        /// <param name="depreciationRange">Nutzungsdauer</param>
         public CalculationData(decimal acquisitionValue, decimal targetRemainingValue, int depreciationRange)
         {
             if (targetRemainingValue >= acquisitionValue)
@@ -17,16 +26,18 @@ namespace FubarDev.Afa
         }
 
         /// <summary>
-        /// Anschaffungswert
+        /// Der Anschaffungswert
         /// </summary>
-        public decimal AcquisitionValue { get; private set; }
+        public decimal AcquisitionValue { get; }
+
         /// <summary>
-        /// Restwert
+        /// Der Restwert nach Ende der Nutzung
         /// </summary>
-        public decimal TargetRemainingValue { get; private set; }
+        public decimal TargetRemainingValue { get; }
+
         /// <summary>
-        /// Nutzungsdauer
+        /// Die geplante Nutzungsdauer
         /// </summary>
-        public int DepreciationRange { get; private set; }
+        public int DepreciationRange { get; }
     }
 }

@@ -7,7 +7,7 @@ using Xunit;
 
 namespace FubarDev.Afa.Tests.CalculationMethods
 {
-    public class GeometrischDegressivTest
+    public class GeometricDegressiveTest
     {
         private void TestResult(CalculationResult result, decimal expectedRemainingValue, decimal expectedDepreciation)
         {
@@ -19,8 +19,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestGeometrischDegressiv1()
         {
             var data = new CalculationData(150000, 18000, 5);
-            var rounding = new FullValueRounding();
-            var calc = new GeometrischDegressiv();
+            var rounding = new DefaultRounding();
+            var calc = new GeometricDegressive();
 
             // Das waren die Werte aus dem Beispiel, doch die scheinen ungenau zu sein:
             // http://www.rechnungswesen-portal.de/Fachinfo/Anlagevermoegen/Geometrisch-degressive-Abschreibung.html
@@ -43,8 +43,8 @@ namespace FubarDev.Afa.Tests.CalculationMethods
         public void TestGeometrischDegressiv2()
         {
             var data = new CalculationData(60000, 10678.71m, 6);
-            var rounding = new FullValueRounding(2);
-            var calc = new GeometrischDegressiv();
+            var rounding = new DefaultRounding(2);
+            var calc = new GeometricDegressive();
 
             TestResult(rounding.Calculate(calc, data, 0), 60000.00m, 0);
             TestResult(rounding.Calculate(calc, data, 1), 45000.00m, 15000.00m);

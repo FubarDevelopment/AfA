@@ -3,10 +3,21 @@ using System.Collections;
 
 namespace FubarDev.Afa
 {
+    /// <summary>
+    /// Hilfsfunktionen für die Berechnung von <see cref="decimal"/>-Wurzeln und -Exponenten
+    /// </summary>
     static class DecimalMath
     {
-        // http://www.daimi.au.dk/~ivan/FastExpproject.pdf
-        // Left to Right Binary Exponentiation
+        /// <summary>
+        /// Potenzierung (<code>x ^ y</code>)
+        /// </summary>
+        /// <remarks>
+        /// http://www.daimi.au.dk/~ivan/FastExpproject.pdf
+        /// Left to Right Binary Exponentiation
+        /// </remarks>
+        /// <param name="x">Der zu potenzierende Wert</param>
+        /// <param name="y">Die Potenz</param>
+        /// <returns>Der potenzierte Wert</returns>
         public static decimal Pow(decimal x, int y)
         {
             if (y == 0)
@@ -15,37 +26,36 @@ namespace FubarDev.Afa
             if (y == 1)
                 return x;
 
-            decimal A = 1m;
+            decimal a = 1m;
             var e = new BitArray(BitConverter.GetBytes(y));
             int t = e.Length;
 
             for (int i = t - 1; i >= 0; --i)
             {
-                A *= A;
+                a *= a;
                 if (e[i])
-                    A *= x;
+                    a *= x;
             }
-            return A;
+            return a;
         }
 
         /// <summary>
-        /// Nth root
+        /// Die n-te Wurzel
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="rootPower"></param>
-        /// <returns></returns>
+        /// <param name="value">Der Wert dessen Wurzel zu ermitteln ist.</param>
+        /// <param name="rootPower">Die zu ziehende Wurzel</param>
+        /// <returns>Die Wurzel von <paramref name="value"/></returns>
         /// <remarks>
-        /// http://www.vbforums.com/showthread.php?695303-%E2%88%9A%E2%88%9A%E2%88%9A-Root-of-a-number-as-a-Decimal-%E2%88%9A%E2%88%9A%E2%88%9A&p=4260359&viewfull=1#post4260359
+        /// <code>http://www.vbforums.com/showthread.php?695303-%E2%88%9A%E2%88%9A%E2%88%9A-Root-of-a-number-as-a-Decimal-%E2%88%9A%E2%88%9A%E2%88%9A&amp;p=4260359&amp;viewfull=1#post4260359</code>
         /// </remarks>
         public static decimal Root(decimal value, int rootPower)
         {
             var guess = (decimal)Math.Pow((double)value, 1.0 / rootPower);
-            decimal oldGuess;
             decimal delta;
             var tolerance = 1.0e-25m;
             do
             {
-                oldGuess = guess;
+                var oldGuess = guess;
                 guess = oldGuess - ((Pow(oldGuess, rootPower) - value) / (rootPower * Pow(oldGuess, rootPower - 1)));
                 delta = guess - oldGuess;
             } while (Math.Abs(delta) >= tolerance);
