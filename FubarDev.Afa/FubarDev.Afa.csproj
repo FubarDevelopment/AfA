@@ -52,12 +52,12 @@
     <Compile Include="CalculationMethods\GeometricDegressive.cs" />
     <Compile Include="CalculationMethods\Linear.cs" />
     <Compile Include="CalculationRoundings\DefaultRounding.cs" />
-    <Compile Include="Calculator.cs" />
+    <None Include="Calculator.cs" />
     <Compile Include="DatePrecisions\AfaDatePrecision30.cs" />
     <Compile Include="DatePrecisions\AfaDatePrecisionActual.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DecimalMath.cs" />
-    <Compile Include="GwgAccountEventArgs.cs" />
+    <None Include="GwgAccountEventArgs.cs" />
     <Compile Include="IAfaDatePrecisionHandler.cs" />
     <Compile Include="ICalculationMethod.cs" />
     <Compile Include="ICalculationRounding.cs" />
