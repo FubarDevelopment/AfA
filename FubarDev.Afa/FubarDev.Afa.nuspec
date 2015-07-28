@@ -13,7 +13,9 @@
     <description>$description$</description>
     <releaseNotes>- Prozentuale Berechnung hinzugefügt
 - Umstellung von degressiver auf lineare Berechnung
-- Umstellung auf GitHub</releaseNotes>
+- Umstellung auf GitHub
+- XML-Dokumentation hinzugefügt
+- Verwendung von Tagen statt NodaTime.Period für Addition und Subtraktion</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>AfA Abschreibung Berechnung Absetzung Abnutzung</tags>
   </metadata>
