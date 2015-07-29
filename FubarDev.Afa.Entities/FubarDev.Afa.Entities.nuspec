@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<package>
+<package >
   <metadata>
     <id>$id$</id>
     <version>$version$</version>
-    <title>AfA-Basis-Funktionen</title>
+    <title>AfA-Datenstruktur</title>
     <authors>Fubar Development Junker</authors>
     <owners>Fubar Development Junker</owners>
     <licenseUrl>https://github.com/FubarDevelopment/AfA/wiki/license</licenseUrl>
@@ -11,12 +11,7 @@
     <iconUrl>https://raw.githubusercontent.com/FubarDevelopment/AfA/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>- Prozentuale Berechnung hinzugefügt
-- Umstellung von degressiver auf lineare Berechnung
-- Umstellung auf GitHub
-- XML-Dokumentation hinzugefügt
-- Verwendung von Tagen statt NodaTime.Period für Addition und Subtraktion
-- AfaDate entfernt (NodaTime.LocalDate muss verwendet werden)</releaseNotes>
+    <releaseNotes>Erstes Release</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>AfA Abschreibung Berechnung Absetzung Abnutzung</tags>
   </metadata>

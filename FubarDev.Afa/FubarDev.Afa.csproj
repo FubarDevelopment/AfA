@@ -41,6 +41,9 @@
     <Compile Include="CalculationMethods\ArithmeticProgressive.cs" />
     <Compile Include="CalculationMethods\DegressiveToLinear.cs" />
     <Compile Include="CalculationMethods\GeometricProgressive.cs" />
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="IDegressiveCalculationMethod.cs" />
     <Compile Include="CalculationMethods\PercentDegressive.cs" />
     <Compile Include="CalculationResult.cs" />
