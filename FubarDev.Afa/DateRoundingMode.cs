@@ -5,7 +5,7 @@ namespace FubarDev.Afa
     /// <summary>
     /// Art der Rundung eines AFA-Datums
     /// </summary>
-    public enum AfaDateRounding
+    public enum DateRoundingMode
     {
         /// <summary>
         /// Auf den Tag genau

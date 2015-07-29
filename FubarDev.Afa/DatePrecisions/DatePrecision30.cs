@@ -5,16 +5,16 @@ using NodaTime;
 namespace FubarDev.Afa.DatePrecisions
 {
     /// <summary>
-    /// AfA-Datum-Genauigkeit, die  wirklich auf den Tag genau ist (inkl. Schaltjahr, etc.).
+    /// AfA-Datum-Genauigkeit von 30 Tagen pro Monat.
     /// </summary>
-    public class AfaDatePrecisionActual : IAfaDatePrecisionHandler
+    public class DatePrecision30 : IDatePrecision
     {
         private static readonly LocalDate _startDate = new LocalDate(1753, 1, 1);
 
         /// <summary>
-        /// Standard-Instanz für die <see cref="AfaDatePrecisionActual"/> Klasse.
+        /// Standard-Instanz für die <see cref="DatePrecision30"/> Klasse.
         /// </summary>
-        public static AfaDatePrecisionActual Default { get; } = new AfaDatePrecisionActual();
+        public static DatePrecision30 Default { get; } = new DatePrecision30();
 
         /// <summary>
         /// Ermittelt die Anzahl an Tagen für das angegeben Jahr
@@ -23,7 +23,7 @@ namespace FubarDev.Afa.DatePrecisions
         /// <returns>Die Anzahl an Tagen für das Jahr</returns>
         public int GetTotalDaysOfYear(int year)
         {
-            return new LocalDate(year, 12, 31).DayOfYear;
+            return 360;
         }
 
         /// <summary>
@@ -36,7 +36,35 @@ namespace FubarDev.Afa.DatePrecisions
         /// <returns>Das neue Datum nach der Addition von Jahren, Monaten und/oder Tagen</returns>
         public LocalDate Add(LocalDate date, long addYears, long addMonths, long addDays)
         {
-            return date + Period.FromDays(addDays) + Period.FromMonths(addMonths) + Period.FromYears(addYears);
+            var day = date.Day + addDays;
+            var month = date.Month + addMonths;
+            var year = date.Year + addYears;
+
+            month += day / 30;
+            day %= 30;
+
+            if (day < 0)
+            {
+                day += 30;
+                --month;
+            }
+
+            year += month / 12;
+            month %= 12;
+            if (month < 0)
+            {
+                month += 12;
+                --year;
+            }
+
+            var newYear = (int)year;
+            var newMonth = (int)month;
+            var newDay = (int)day;
+            var lastDayOfMonth = new LocalDate(newYear, newMonth, 1).GetLastDayOfMonth();
+            if (lastDayOfMonth.Day < newDay)
+                newDay = lastDayOfMonth.Day;
+
+            return new LocalDate(newYear, newMonth, newDay);
         }
 
         /// <summary>
@@ -50,7 +78,7 @@ namespace FubarDev.Afa.DatePrecisions
         /// <returns>Das korrigierte Datum</returns>
         public LocalDate Fix(LocalDate date)
         {
-            return date;
+            return new LocalDate(date.Year, date.Month, date.Day > 30 ? 30 : date.Day);
         }
 
         /// <summary>
@@ -60,7 +88,7 @@ namespace FubarDev.Afa.DatePrecisions
         /// <returns>Die Anzahl an Tagen seit dem ersten Januar (01.01. == 1)</returns>
         public int GetDayOfYear(LocalDate date)
         {
-            return date.DayOfYear;
+            return (date.Month - 1) * 30 + date.Day;
         }
 
         /// <summary>
@@ -70,7 +98,7 @@ namespace FubarDev.Afa.DatePrecisions
         /// <returns>Die Anzahl an Tagen seit dem 01.01.1753</returns>
         public long GetTotalDays(LocalDate date)
         {
-            return Period.Between(_startDate, date).Days;
+            return (date.Year - _startDate.Year) * 360 + GetDayOfYear(date);
         }
     }
 }

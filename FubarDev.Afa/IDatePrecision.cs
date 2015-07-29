@@ -8,7 +8,7 @@ namespace FubarDev.Afa
     /// <remarks>
     /// Die Implementation dieser Schnittstelle definiert die Genauigkeit der Datumsangaben
     /// </remarks>
-    public interface IAfaDatePrecisionHandler
+    public interface IDatePrecision
     {
         /// <summary>
         /// Ermittelt die Anzahl an Tagen für das angegeben Jahr

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa", "FubarDev.Af
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa.Tests", "FubarDev.Afa.Tests\FubarDev.Afa.Tests.csproj", "{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa.Calculation", "FubarDev.Afa.Calculation\FubarDev.Afa.Calculation.csproj", "{8F7AEA15-359D-4831-ADF8-C5DF6F75CD9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa.Entities", "FubarDev.Afa.Entities\FubarDev.Afa.Entities.csproj", "{0DEEDE47-6428-4CDD-9689-A59B639DDF1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F7AEA15-359D-4831-ADF8-C5DF6F75CD9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F7AEA15-359D-4831-ADF8-C5DF6F75CD9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F7AEA15-359D-4831-ADF8-C5DF6F75CD9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F7AEA15-359D-4831-ADF8-C5DF6F75CD9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DEEDE47-6428-4CDD-9689-A59B639DDF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DEEDE47-6428-4CDD-9689-A59B639DDF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DEEDE47-6428-4CDD-9689-A59B639DDF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DEEDE47-6428-4CDD-9689-A59B639DDF1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

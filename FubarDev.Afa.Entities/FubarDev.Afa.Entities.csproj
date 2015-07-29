@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E381A534-55F4-4ABA-9207-A335A30C7075}</ProjectGuid>
+    <ProjectGuid>{0DEEDE47-6428-4CDD-9689-A59B639DDF1E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FubarDev.Afa</RootNamespace>
-    <AssemblyName>FubarDev.Afa</AssemblyName>
+    <RootNamespace>FubarDev.Afa.Entities</RootNamespace>
+    <AssemblyName>FubarDev.Afa.Entities</AssemblyName>
     <DefaultLanguage>de-DE</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,34 +32,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\FubarDev.Afa.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DateRoundingMode.cs" />
-    <Compile Include="CalculationData.cs" />
-    <Compile Include="CalculationMethods\Arithmetic.cs" />
-    <Compile Include="CalculationMethods\ArithmeticProgressive.cs" />
-    <Compile Include="CalculationMethods\DegressiveToLinear.cs" />
-    <Compile Include="CalculationMethods\GeometricProgressive.cs" />
-    <Compile Include="IDegressiveCalculationMethod.cs" />
-    <Compile Include="CalculationMethods\PercentDegressive.cs" />
-    <Compile Include="CalculationResult.cs" />
-    <Compile Include="CalculationMethods\ArithmeticDegressive.cs" />
-    <Compile Include="CalculationMethods\GeometricDegressive.cs" />
-    <Compile Include="CalculationMethods\Linear.cs" />
-    <Compile Include="CalculationRoundings\DefaultRounding.cs" />
-    <Compile Include="DatePrecisions\DatePrecision30.cs" />
-    <Compile Include="DatePrecisions\DatePrecisionActual.cs" />
-    <Compile Include="LocalDateExtensions.cs" />
-    <Compile Include="DecimalMath.cs" />
-    <None Include="FubarDev.Afa.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <Compile Include="IDatePrecision.cs" />
-    <Compile Include="ICalculationMethod.cs" />
-    <Compile Include="ICalculationRounding.cs" />
-    <Compile Include="LinqExtensions.cs" />
+    <Compile Include="AdditionalWriteUpOrOff.cs" />
+    <Compile Include="AfaCalculationMethod.cs" />
+    <Compile Include="AfaDatePrecision.cs" />
+    <Compile Include="Asset.cs" />
+    <Compile Include="AssetStatus.cs" />
+    <Compile Include="CalculatedWriteOff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AssetWriteOff.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NodaTime, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
@@ -69,6 +51,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FubarDev.Afa\FubarDev.Afa.csproj">
+      <Project>{e381a534-55f4-4aba-9207-a335a30c7075}</Project>
+      <Name>FubarDev.Afa</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
