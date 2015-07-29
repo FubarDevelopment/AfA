@@ -5,7 +5,7 @@ using NodaTime;
 namespace FubarDev.Afa
 {
     /// <summary>
-    /// Erweiterungen für die Umwandlung von DateTime in <see cref="AfaDate{T}"/>
+    /// Erweiterungen für <see cref="LocalDate"/>
     /// </summary>
     public static class LocalDateExtensions
     {
