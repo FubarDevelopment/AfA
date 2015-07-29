@@ -10,7 +10,7 @@ Dies ist eine Bibliothek für die Berechnung der Abschreibungs- und Restbuchwert
 * Geometrisch degressiv
 * Geometrisch progressiv
 * Wechsel von degressiver zu linearer Abschreibung
-	* An dieser stelle ist auch eine prozentuale Abschreibung sinnvoll
+	* An dieser Stelle ist auch eine prozentuale Abschreibung sinnvoll
 
 # Tagesgenauigkeit
 
