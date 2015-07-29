@@ -36,6 +36,15 @@ namespace FubarDev.Afa.Entities
         }
 
         /// <summary>
+        /// Holt oder setzt den Kalendermonat (Tag ist immer 01.) als <see cref="DateTime"/>
+        /// </summary>
+        public DateTime MonthDateTime
+        {
+            get { return Month.AtMidnight().ToDateTimeUnspecified(); }
+            set { Month = LocalDateTime.FromDateTime(value).Date; }
+        }
+
+        /// <summary>
         /// Holt oder setzt den Abschreibungsbetrag
         /// </summary>
         public decimal Depreciation { get; set; }

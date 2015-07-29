@@ -56,9 +56,27 @@ namespace FubarDev.Afa.Entities
         public LocalDate AcquisitionDate { get; set; }
 
         /// <summary>
+        /// Holt oder setzt das Anschaffungsdatum als <see cref="DateTime"/>
+        /// </summary>
+        public DateTime AcquisitionDateTime
+        {
+            get { return AcquisitionDate.AtMidnight().ToDateTimeUnspecified(); }
+            set { AcquisitionDate = LocalDateTime.FromDateTime(value).Date; }
+        }
+
+        /// <summary>
         /// Holt oder setzt das Abgangsdatum
         /// </summary>
         public LocalDate? DispatchDate { get; set; }
+
+        /// <summary>
+        /// Holt oder setzt das Abgangsdatum als <see cref="DateTime"/>
+        /// </summary>
+        public DateTime? DispatchDateTime
+        {
+            get { return (DispatchDate?.AtMidnight())?.ToDateTimeUnspecified(); }
+            set { DispatchDate = value == null ? null : (LocalDate?)LocalDateTime.FromDateTime(value.Value).Date; }
+        }
 
         /// <summary>
         /// Holt oder setzt ein beliebig vergebbares Kennzeichen

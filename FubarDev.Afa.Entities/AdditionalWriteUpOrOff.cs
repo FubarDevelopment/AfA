@@ -34,5 +34,14 @@ namespace FubarDev.Afa.Entities
         /// Holt oder setzt das Datum für die Ab- oder Zuschreibung
         /// </summary>
         public LocalDate Date { get; set; }
+
+        /// <summary>
+        /// Holt oder setzt das Datum für die Ab- oder Zuschreibung als <see cref="DateTime"/>
+        /// </summary>
+        public DateTime DateTime
+        {
+            get { return Date.AtMidnight().ToDateTimeUnspecified(); }
+            set { Date = LocalDateTime.FromDateTime(value).Date; }
+        }
     }
 }
