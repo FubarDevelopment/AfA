@@ -81,7 +81,7 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt ein beliebig vergebbares Kennzeichen
         /// </summary>
-        public int UserValue { get; set; }
+        public int? UserValue { get; set; }
 
         /// <summary>
         /// Holt oder setzt alle Abschreibungseinstellungen für diese Anlage
