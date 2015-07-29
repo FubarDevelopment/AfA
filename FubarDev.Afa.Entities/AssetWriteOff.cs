@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FubarDev.Afa.Entities
 {
@@ -94,5 +95,10 @@ namespace FubarDev.Afa.Entities
                 _changeToLinear = value;
             }
         }
+
+        /// <summary>
+        /// Holt oder setzt die berechneten Abschreibungen
+        /// </summary>
+        public ICollection<CalculatedWriteOff> CalculatedWriteOffs { get; set; }
     }
 }

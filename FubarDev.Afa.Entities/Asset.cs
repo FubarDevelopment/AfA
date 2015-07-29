@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using NodaTime;
 
@@ -63,5 +64,15 @@ namespace FubarDev.Afa.Entities
         /// Holt oder setzt ein beliebig vergebbares Kennzeichen
         /// </summary>
         public int UserValue { get; set; }
+
+        /// <summary>
+        /// Holt oder setzt alle Abschreibungseinstellungen für diese Anlage
+        /// </summary>
+        public ICollection<AssetWriteOff> AssetWriteOffs { get; set; }
+
+        /// <summary>
+        /// Holt oder setzt zusätzliche Zu- oder Abschreibungen für diese Anlage
+        /// </summary>
+        public ICollection<AdditionalWriteUpOrOff> AdditionalWriteUpOrOffs { get; set; }
     }
 }
