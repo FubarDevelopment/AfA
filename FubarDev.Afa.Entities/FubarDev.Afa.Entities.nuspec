@@ -14,5 +14,8 @@
     <releaseNotes>Erstes Release</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>AfA Abschreibung Berechnung Absetzung Abnutzung</tags>
+    <dependencies>
+      <dependency id="FubarDev.Afa" version="$id$" />
+    </dependencies>
   </metadata>
 </package>
