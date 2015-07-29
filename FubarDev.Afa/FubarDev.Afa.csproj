@@ -35,13 +35,6 @@
     <DocumentationFile>bin\Release\FubarDev.Afa.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\FubarDev.Afa.Entities\FubarDev.Afa.Entities.csproj">
-      <Project>{7f082b50-9f95-47de-afa1-70beb0e5a87e}</Project>
-      <Name>FubarDev.Afa.Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="AfaDate.cs" />
     <Compile Include="AfaDateRounding.cs" />
     <Compile Include="CalculationData.cs" />
@@ -56,7 +49,6 @@
     <Compile Include="CalculationMethods\GeometricDegressive.cs" />
     <Compile Include="CalculationMethods\Linear.cs" />
     <Compile Include="CalculationRoundings\DefaultRounding.cs" />
-    <None Include="Calculator.cs" />
     <Compile Include="DatePrecisions\AfaDatePrecision30.cs" />
     <Compile Include="DatePrecisions\AfaDatePrecisionActual.cs" />
     <Compile Include="DateTimeExtensions.cs" />
@@ -64,7 +56,6 @@
     <None Include="FubarDev.Afa.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="GwgAccountEventArgs.cs" />
     <Compile Include="IAfaDatePrecisionHandler.cs" />
     <Compile Include="ICalculationMethod.cs" />
     <Compile Include="ICalculationRounding.cs" />

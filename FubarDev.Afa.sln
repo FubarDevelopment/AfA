@@ -5,10 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa", "FubarDev.Afa\FubarDev.Afa.csproj", "{E381A534-55F4-4ABA-9207-A335A30C7075}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa.Entities", "FubarDev.Afa.Entities\FubarDev.Afa.Entities.csproj", "{7F082B50-9F95-47DE-AFA1-70BEB0E5A87E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa.Entities.NHMapping", "FubarDev.Afa.Entities.NHMapping\FubarDev.Afa.Entities.NHMapping.csproj", "{7793280C-4E23-4E22-BC89-D9D1372A4780}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FubarDev.Afa.Tests", "FubarDev.Afa.Tests\FubarDev.Afa.Tests.csproj", "{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}"
 EndProject
 Global
@@ -21,14 +17,6 @@ Global
 		{E381A534-55F4-4ABA-9207-A335A30C7075}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E381A534-55F4-4ABA-9207-A335A30C7075}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E381A534-55F4-4ABA-9207-A335A30C7075}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F082B50-9F95-47DE-AFA1-70BEB0E5A87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F082B50-9F95-47DE-AFA1-70BEB0E5A87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F082B50-9F95-47DE-AFA1-70BEB0E5A87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F082B50-9F95-47DE-AFA1-70BEB0E5A87E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7793280C-4E23-4E22-BC89-D9D1372A4780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7793280C-4E23-4E22-BC89-D9D1372A4780}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7793280C-4E23-4E22-BC89-D9D1372A4780}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7793280C-4E23-4E22-BC89-D9D1372A4780}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C49CFB12-BF04-4E3E-AF88-FBC293EF8113}.Release|Any CPU.ActiveCfg = Release|Any CPU
