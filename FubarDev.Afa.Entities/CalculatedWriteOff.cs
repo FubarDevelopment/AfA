@@ -14,17 +14,17 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt die ID dieses Objektes
         /// </summary>
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Abschreibungs-Vorschrift für die dieser berechnete Eintrag gilt
         /// </summary>
-        public AssetWriteOff AssetWriteOff { get; set; }
+        public virtual AssetWriteOff AssetWriteOff { get; set; }
 
         /// <summary>
         /// Holt oder setzt den Kalendermonat (Tag ist immer 01.)
         /// </summary>
-        public LocalDate Month
+        public virtual LocalDate Month
         {
             get { return _month; }
             set
@@ -38,7 +38,7 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt den Kalendermonat (Tag ist immer 01.) als <see cref="DateTime"/>
         /// </summary>
-        public DateTime MonthDateTime
+        public virtual DateTime MonthDateTime
         {
             get { return Month.AtMidnight().ToDateTimeUnspecified(); }
             set { Month = LocalDateTime.FromDateTime(value).Date; }
@@ -47,21 +47,21 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt den Abschreibungsbetrag
         /// </summary>
-        public decimal Depreciation { get; set; }
+        public virtual decimal Depreciation { get; set; }
 
         /// <summary>
         /// Holt oder setzt den Restbuchwert
         /// </summary>
-        public decimal RemainingValue { get; set; }
+        public virtual decimal RemainingValue { get; set; }
 
         /// <summary>
         /// Holt oder setzt den Status für diesen Eintrag
         /// </summary>
-        public AssetStatus Status { get; set; }
+        public virtual AssetStatus Status { get; set; }
 
         /// <summary>
         /// Holt oder setzt einen Wert der angibt, ob dieser Eintrag unveränderlich ist
         /// </summary>
-        public bool IsFixed { get; set; }
+        public virtual bool IsFixed { get; set; }
     }
 }

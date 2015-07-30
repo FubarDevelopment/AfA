@@ -15,12 +15,12 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt die ID dieses Objektes
         /// </summary>
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Anlage für die dieser Eintrag gilt
         /// </summary>
-        public Asset Asset { get; set; }
+        public virtual Asset Asset { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Jahre relativ zum Anschaffungsjahr
@@ -28,37 +28,37 @@ namespace FubarDev.Afa.Entities
         /// <remarks>
         /// Das Jahr 0 ist das Anschaffungsjahr.
         /// </remarks>
-        public int YearsSinceAcquisition { get; set; }
+        public virtual int YearsSinceAcquisition { get; set; }
 
         /// <summary>
         /// Holt oder setzt den aktuellen Buchwert der Anlage
         /// </summary>
-        public decimal CurrentValue { get; set; }
+        public virtual decimal CurrentValue { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Nutzungsdauer in Jahren
         /// </summary>
-        public int Lifetime { get; set; }
+        public virtual int Lifetime { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Art der Datumsrundung
         /// </summary>
-        public DateRoundingMode Rounding { get; set; }
+        public virtual DateRoundingMode Rounding { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Information, wie genau die Datumsrechnung sein soll
         /// </summary>
-        public AfaDatePrecision Precision { get; set; }
+        public virtual AfaDatePrecision Precision { get; set; }
 
         /// <summary>
         /// Holt oder setzt das Berechnungsverfahren
         /// </summary>
-        public AfaCalculationMethod CalculationMethod { get; set; }
+        public virtual AfaCalculationMethod CalculationMethod { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Prozente für das Berechnungsverfahren <see cref="AfaCalculationMethod.PercentToLinear"/>
         /// </summary>
-        public decimal? Percent
+        public virtual decimal? Percent
         {
             get
             {
@@ -75,7 +75,7 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt einen Wert der angibt, ob es einen Wechsel von einer degressiven zu einer Linearen Berechnung gibt.
         /// </summary>
-        public bool ChangeToLinear
+        public virtual bool ChangeToLinear
         {
             get
             {
@@ -99,6 +99,6 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt die berechneten Abschreibungen
         /// </summary>
-        public ICollection<CalculatedWriteOff> CalculatedWriteOffs { get; set; }
+        public virtual ICollection<CalculatedWriteOff> CalculatedWriteOffs { get; set; }
     }
 }

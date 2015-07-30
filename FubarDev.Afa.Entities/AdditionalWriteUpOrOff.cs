@@ -12,12 +12,12 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt die ID dieses Objektes
         /// </summary>
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Anlage für die dieser Eintrag gilt
         /// </summary>
-        public Asset Asset { get; set; }
+        public virtual Asset Asset { get; set; }
 
         /// <summary>
         /// Holt oder setzt den Wert, der ab- oder zugeschrieben wird
@@ -28,17 +28,17 @@ namespace FubarDev.Afa.Entities
         /// <item>&lt; 0 : Abschreibung</item>
         /// </list>
         /// </remarks>
-        public decimal Value { get; set; }
+        public virtual decimal Value { get; set; }
 
         /// <summary>
         /// Holt oder setzt das Datum für die Ab- oder Zuschreibung
         /// </summary>
-        public LocalDate Date { get; set; }
+        public virtual LocalDate Date { get; set; }
 
         /// <summary>
         /// Holt oder setzt das Datum für die Ab- oder Zuschreibung als <see cref="DateTime"/>
         /// </summary>
-        public DateTime DateTime
+        public virtual DateTime DateTime
         {
             get { return Date.AtMidnight().ToDateTimeUnspecified(); }
             set { Date = LocalDateTime.FromDateTime(value).Date; }

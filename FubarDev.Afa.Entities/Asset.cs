@@ -13,52 +13,52 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt die ID dieses Objektes
         /// </summary>
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Kontonummer
         /// </summary>
-        public string Account { get; set; }
+        public virtual string Account { get; set; }
 
         /// <summary>
         /// Holt oder setzt den ersten Teil des Namens
         /// </summary>
-        public string Name1 { get; set; }
+        public virtual string Name1 { get; set; }
 
         /// <summary>
         /// Holt oder setzt den zweiten Teil des Namens
         /// </summary>
-        public string Name2 { get; set; }
+        public virtual string Name2 { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Anzahl
         /// </summary>
-        public decimal Amount { get; set; }
+        public virtual decimal Amount { get; set; }
 
         /// <summary>
         /// Holt oder setzt die Kostenstelle
         /// </summary>
-        public string CostCentre { get; set; }
+        public virtual string CostCentre { get; set; }
 
         /// <summary>
         /// Holt oder setzt den Anschaffungswert
         /// </summary>
-        public decimal AcquisitionValue { get; set; }
+        public virtual decimal AcquisitionValue { get; set; }
 
         /// <summary>
         /// Holt oder setzt den Restbuchwert
         /// </summary>
-        public decimal RemainingValue { get; set; }
+        public virtual decimal RemainingValue { get; set; }
 
         /// <summary>
         /// Holt oder setzt das Anschaffungsdatum
         /// </summary>
-        public LocalDate AcquisitionDate { get; set; }
+        public virtual LocalDate AcquisitionDate { get; set; }
 
         /// <summary>
         /// Holt oder setzt das Anschaffungsdatum als <see cref="DateTime"/>
         /// </summary>
-        public DateTime AcquisitionDateTime
+        public virtual DateTime AcquisitionDateTime
         {
             get { return AcquisitionDate.AtMidnight().ToDateTimeUnspecified(); }
             set { AcquisitionDate = LocalDateTime.FromDateTime(value).Date; }
@@ -67,12 +67,12 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt das Abgangsdatum
         /// </summary>
-        public LocalDate? DispatchDate { get; set; }
+        public virtual LocalDate? DispatchDate { get; set; }
 
         /// <summary>
         /// Holt oder setzt das Abgangsdatum als <see cref="DateTime"/>
         /// </summary>
-        public DateTime? DispatchDateTime
+        public virtual DateTime? DispatchDateTime
         {
             get { return (DispatchDate?.AtMidnight())?.ToDateTimeUnspecified(); }
             set { DispatchDate = value == null ? null : (LocalDate?)LocalDateTime.FromDateTime(value.Value).Date; }
@@ -81,16 +81,16 @@ namespace FubarDev.Afa.Entities
         /// <summary>
         /// Holt oder setzt ein beliebig vergebbares Kennzeichen
         /// </summary>
-        public int? UserValue { get; set; }
+        public virtual int? UserValue { get; set; }
 
         /// <summary>
         /// Holt oder setzt alle Abschreibungseinstellungen für diese Anlage
         /// </summary>
-        public ICollection<AssetWriteOff> AssetWriteOffs { get; set; }
+        public virtual ICollection<AssetWriteOff> AssetWriteOffs { get; set; }
 
         /// <summary>
         /// Holt oder setzt zusätzliche Zu- oder Abschreibungen für diese Anlage
         /// </summary>
-        public ICollection<AdditionalWriteUpOrOff> AdditionalWriteUpOrOffs { get; set; }
+        public virtual ICollection<AdditionalWriteUpOrOff> AdditionalWriteUpOrOffs { get; set; }
     }
 }
