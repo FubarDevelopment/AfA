@@ -16,6 +16,11 @@
         Acquiring,
 
         /// <summary>
+        /// Zugang und Abgang im gleichen Monat
+        /// </summary>
+        AcquiringAndDispatching,
+
+        /// <summary>
         /// Normal (zwischen Zugang und Abgang)
         /// </summary>
         Acquired,
