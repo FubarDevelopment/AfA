@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>AfA-Mappings für EF6</title>
+    <authors>Fubar Development Junker</authors>
+    <owners>Fubar Development Junker</owners>
+    <licenseUrl>https://github.com/FubarDevelopment/AfA/wiki/license</licenseUrl>
+    <projectUrl>https://github.com/FubarDevelopment/AfA</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/FubarDevelopment/AfA/master/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Erstes Release</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>AfA Abschreibung Berechnung Absetzung Abnutzung Mapping EF6 Entity Framework</tags>
+    <dependencies>
+      <dependency id="FubarDev.Afa" version="$version$" />
+      <dependency id="FubarDev.Afa.Entities" version="$version$" />
+    </dependencies>
+  </metadata>
+</package>
